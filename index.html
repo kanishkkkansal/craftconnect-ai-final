@@ -1,0 +1,3709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CraftConnect AI - Empowering Indian Artisans</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+header {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 1rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+header.scrolled {
+    padding: 0.5rem 5%;
+    background: rgba(17, 17, 17, 0.98);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+}
+
+.nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+/* FIXED CART - CLEARS NAVIGATION BAR */
+#cart-panel { 
+    position: fixed; 
+    right: -350px; 
+    top: 90px;          /* ← INCREASED from 80px to 90px */
+    width: 350px; 
+    height: calc(100vh - 90px);  /* ← MATCHES top value */
+    max-height: 80vh;    /* ← ADDED safety limit */
+    background: white; 
+    box-shadow: -8px 0 30px rgba(0,0,0,0.4);
+    padding: 25px; 
+    border-radius: 15px 0 0 15px;  /* ← Rounded left corners */
+    transition: right 0.4s ease; 
+    z-index: 9999;       /* ← MAX Z-INDEX */
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+}
+
+#cart-panel.active { 
+    right: 0; 
+}
+
+#cart-panel h3 {
+    margin: 0 0 20px 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#cart-panel h3::before {
+    content: "✕";
+    background: #ff4757;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav a:hover {
+    color: #ff8b42;
+}
+#marketplace{
+position:relative;
+padding:80px 10%;
+overflow:hidden;
+}
+
+/* background container */
+
+.market-bg{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+opacity:0.2;
+z-index:0;
+}
+
+/* columns */
+
+.bg-column{
+flex:1;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+/* images */
+
+.bg-column img{
+width:100%;
+height:50%;
+object-fit:cover;
+}
+
+/* keep content above background */
+
+#marketplace *{
+position:relative;
+z-index:1;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #ff8c42;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+
+.hero{
+height:100vh;
+
+background-image:
+linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+url("https://kapdashop.com/cdn/shop/articles/1579883488802_520x500_f52f5937-b73b-4033-abd1-c6e5bd15dabb.jpg?v=1770033126&width=2048");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+
+color:white;
+padding:0 5%;
+}
+
+.hero-content h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    animation: fadeInUp 1s ease 0.2s both;
+}
+
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease 0.4s both;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 1rem 2rem;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+.card-content{
+display:flex;
+flex-direction:column;
+}
+.add-cart-btn{
+margin-top:16px;          /* space from counter */
+width:100%;
+padding:12px;
+background:linear-gradient(135deg,#ff8b42,#ff6a00);
+color:white;
+border:none;
+border-radius:10px;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+letter-spacing:0.5px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:6px;
+
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
+transition:all 0.3s ease;
+}
+
+.add-cart-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 18px rgba(0,0,0,0.25);
+background:linear-gradient(135deg,#ff6a00,#ff8b42);
+}
+.card-footer{
+margin-top:12px;
+}
+.btn-primary {
+    background: #ff8c42;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #ff6a00;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 140, 66, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #333;
+}
+
+section {
+
+padding:80px 10%;
+background-image: url("https://images.unsplash.com/photo-1524492449090-1e0b98d50b27");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+.testimonial-grid{
+display:flex;
+gap:25px;
+overflow:hidden;
+position:relative;
+}
+
+.testimonial{
+min-width:300px;
+background:rgba(255,255,255,0.15);
+padding:25px;
+border-radius:12px;
+backdrop-filter:blur(6px);
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+animation:slideTestimonials 15s linear infinite;
+}
+.testimonial-grid:hover .testimonial{
+animation-play-state:paused;
+}
+
+@keyframes slideTestimonials{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #111;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 700px;
+    margin: 1rem auto 4rem;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-content h3 {
+    margin-bottom: 0.5rem;
+    color: #111;
+    font-size: 1.3rem;
+}
+
+.card-content p {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+#artisans{
+padding:80px 10%;
+position:relative;
+
+background-image: url("https://neotradeinternational.in/wp-content/uploads/2024/03/hands-make-potter-decorative-pattern-earthenware.jpg");
+background-position: center;
+background-repeat: no-repeat;
+
+}
+
+
+#artisans::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+}
+
+#artisans *{
+position:relative;
+z-index:1;
+}
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin: 4rem 0;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ff8c42;
+    display: block;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.ai-section {
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+    color: white;
+    text-align: center;
+}
+
+.ai-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.feature-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 140, 66, 0.1);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: #ff8c42;
+    margin-bottom: 1rem;
+}
+
+.testimonials {
+    background: white;
+    padding: 100px 5%;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.testimonial-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    background: #ff8c42;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+}
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.testimonial-author {
+    font-weight: 600;
+    color: #111;
+}
+
+.upload-section {
+    background: linear-gradient(135deg, #dba871 0%, #e09c5c 100%);
+    color: white;
+    text-align: center;
+}
+
+.upload-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    padding: 3rem;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.upload-container input[type="file"] {
+    display: none;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    border: 2px dashed rgba(255,255,255,0.3);
+}
+
+.file-input-label:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.ai-result {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.2);
+    border-radius: 15px;
+    display: none;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.close:hover {
+    color: #333;
+}
+
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 3rem 5% 1.5rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+    color: #ff8c42;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 1.5rem;
+    color: #999;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(17,17,17,0.98);
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    nav.active {
+        display: flex;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Scroll animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Marketplace animations */
+
+.card-actions{
+display:flex;
+gap:10px;
+}
+
+.cart-btn, .wish-btn{
+border:none;
+background:#f2f2f2;
+padding:8px 10px;
+border-radius:50%;
+cursor:pointer;
+transition:all 0.3s ease;
+}
+
+.cart-btn:hover{
+background:#ff8c42;
+color:white;
+transform:scale(1.2);
+}
+
+.wish-btn:hover{
+background:#ff4d6d;
+color:white;
+transform:scale(1.2);
+}
+
+.wish-btn.active{
+background:#ff4d6d;
+color:white;
+animation:heartBeat 0.4s ease;
+}
+
+@keyframes heartBeat{
+0%{transform:scale(1)}
+50%{transform:scale(1.4)}
+100%{transform:scale(1)}
+}
+
+.card:hover{
+box-shadow:0 20px 60px rgba(255,140,66,0.4);
+}
+
+.grid .card{
+animation:cardFade 0.8s ease;
+}
+
+@keyframes cardFade{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+#stories{
+padding:60px 8%;
+background:#f5f2ee;
+text-align:center;
+}
+
+#stories .section-subtitle{
+margin-top:8px;
+margin-bottom:40px;
+color:#555;
+font-size:14px;
+}
+
+/* grid layout */
+
+.story-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:18px;
+}
+
+/* story card */
+
+.story-card{
+background:rgb(231, 212, 188);
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 6px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+/* hover effect */
+
+.story-card:hover{
+transform:translateY(-6px);
+}
+
+/* image */
+
+.story-card img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+/* title */
+
+.story-card h3{
+padding:10px;
+font-size:16px;
+}
+
+/* text */
+
+.story-card p{
+padding:0 10px 15px 10px;
+font-size:13px;
+color:#827c7c;
+line-height:1.4;
+}
+
+.testimonials{
+padding:80px 10%;
+text-align:center;
+color:white;
+
+
+background-image:
+linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+url("https://www.orissapost.com/wp-content/uploads/2019/07/artisan-work-1024x646.jpg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+}
+.card-footer{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-top:10px;
+}
+
+.price{
+background:#ff8b42;
+color:white;
+padding:6px 12px;
+border-radius:8px;
+font-weight:600;
+}
+
+.counter{
+display:flex;
+align-items:center;
+gap:5px;
+}
+
+.counter button{
+width:25px;
+height:25px;
+border:none;
+border-radius:5px;
+background:#eee;
+cursor:pointer;
+}
+
+.counter button:hover{
+background:#ff8b42;
+color:white;
+}
+
+.count{
+font-weight:600;
+}
+.price{
+color:#ff8c42;
+font-size:22px;
+font-weight:700;
+}
+
+.price-qty{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+margin:10px 0;
+}
+.cart-icon{
+cursor:pointer;
+font-size:22px;
+position:relative;
+}
+
+#cart-count{
+background:#ff8b42;
+color:white;
+border-radius:50%;
+padding:2px 7px;
+font-size:12px;
+position:absolute;
+top:-8px;
+right:-10px;
+}
+
+
+
+#cart-panel.active{
+right:0;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+}
+
+.pay-btn{
+width:100%;
+padding:12px;
+background:#ff8b42;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin-top:20px;
+}
+.cart-item{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin:10px 0;
+}
+
+.cart-counter{
+display:flex;
+gap:5px;
+}
+
+.cart-counter button{
+width:22px;
+height:22px;
+border:none;
+background:#d9b5b5;
+cursor:pointer;
+}
+
+.cart-counter button:hover{
+background:#ff8b42;
+color:white;
+}
+#ai-tools{
+padding:120px 60px 100px;
+background:linear-gradient(180deg,#eacdb3,#e6c4ad);
+min-height:100vh;
+scroll-margin-top:120px;
+}
+.section-title{
+text-align:center;
+font-size:42px;
+font-weight:700;
+margin-bottom:60px;
+color:#f06d2f;
+}
+.ai-subtitle{
+text-align:center;
+color:#e27435;
+margin-bottom:60px;
+font-size:16px;
+}
+
+.ai-card{
+position:relative;
+padding:32px;
+border-radius:16px;
+color:white;
+overflow:hidden;
+background-size:cover;
+background-position:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.ai-card:hover{
+transform:translateY(-8px) scale(1.02);
+}
+.ai-card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+z-index:1;
+}
+
+.ai-card *{
+position:relative;
+z-index:2;
+}
+.ai-card button{
+background:#ff7a30;
+color:white;
+border:none;
+padding:12px 18px;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+transition:0.25s;
+}
+
+.ai-card button:hover{
+background:#e6631d;
+}
+.ai-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:40px;
+max-width:1200px;
+margin:auto;
+}
+.ai-story-card{
+background-image:url(https://images.unsplash.com/photo-1721572321944-e297b2d68aa7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aW5kaWFuJTIwY2xhc3NpY2FsfGVufDB8fDB8fHww);
+}
+
+.ai-social-card{
+background-image:url(https://images.unsplash.com/photo-1633411988188-6e63354a9019?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+}
+
+.ai-price-card{
+background-image:url(https://images.unsplash.com/photo-1653246458437-fd78a9265711?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGluZGlhbiUyMGNsYXNzaWNhbHxlbnwwfHwwfHx8MA%3D%3D);
+}
+
+
+.ai-card input{
+width:100%;
+padding:12px;
+margin:12px 0;
+border-radius:8px;
+border:none;
+background:rgba(255,255,255,0.9);
+font-size:14px;
+}
+#storyResult,
+#postResult,
+#priceResult{
+display:none;
+margin-top:14px;
+padding:14px;
+background:#e0a880;
+border-left:4px solid #f06d2f;
+border-radius:6px;
+font-size:14px;
+}
+html, body{
+overflow-x: hidden;
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+#trade{
+    padding:80px 10%;
+    position:relative;
+    overflow:hidden;
+
+    background-image:
+    linear-gradient(rgba(255,247,239,0.6), rgba(243,236,228,0.6)),
+    url("https://img.freepik.com/premium-vector/luxurious-orange-peel-lotus-mandala-simple-blank-vector-background_179530-741.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+#trade *{
+    position:relative;
+    z-index:1;
+}
+
+.trade-chat-layout{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:24px;
+    align-items:start;
+}
+
+.trade-list{
+    background:white;
+    border-radius:22px;
+    padding:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    max-height:760px;
+    overflow-y:auto;
+}
+
+#tradeContactList{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.trade-contact{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:12px;
+    border-radius:16px;
+    background:#fff8f2;
+    cursor:pointer;
+    transition:0.3s;
+    border:1px solid transparent;
+}
+
+.trade-contact:hover,
+.active-contact{
+    background:#fff0e3;
+    border:1px solid #f2d2bb;
+}
+
+.trade-contact img{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.trade-contact h4{
+    color:#333;
+    font-size:15px;
+    margin-bottom:2px;
+}
+
+.trade-contact p{
+    color:#666;
+    font-size:13px;
+    margin-bottom:2px;
+}
+
+.trade-contact span{
+    color:#f06d2f;
+    font-size:12px;
+    font-weight:600;
+}
+
+.trade-chat-area{
+    background:white;
+    border-radius:22px;
+    padding:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.trade-chat-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding-bottom:14px;
+    border-bottom:1px solid #eee2d7;
+    margin-bottom:16px;
+}
+
+.trade-chat-header img{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.trade-chat-header h3{
+    color:#333;
+    margin-bottom:4px;
+}
+
+.trade-chat-header p{
+    color:#777;
+    font-size:14px;
+}
+
+.trade-chat-messages{
+    min-height:260px;
+    max-height:320px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding:4px 2px 14px;
+}
+
+.chat-msg{
+    max-width:74%;
+    padding:12px 14px;
+    border-radius:16px;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.chat-msg.other{
+    align-self:flex-start;
+    background:#f3ece5;
+    color:#444;
+}
+
+.chat-msg.me{
+    align-self:flex-end;
+    background:#ffd8b3;
+    color:#4b2a14;
+}
+
+.trade-map-mini{
+    margin:16px 0;
+}
+
+.trade-map-mini iframe{
+    width:100%;
+    height:220px;
+    border:none;
+    border-radius:16px;
+}
+
+.trade-chat-input{
+    display:flex;
+    gap:10px;
+}
+
+.trade-chat-input input{
+    flex:1;
+    padding:12px 14px;
+    border:1px solid #e8d7cb;
+    border-radius:12px;
+    background:#fffaf6;
+    font-size:14px;
+}
+
+.trade-chat-input button{
+    padding:12px 18px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#ff8b42,#ff6a00);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.trade-chat-input button:hover{
+    box-shadow:0 8px 18px rgba(255,106,0,0.22);
+}
+
+.trade-image-msg{
+    max-width:220px;
+    border-radius:14px;
+    overflow:hidden;
+    align-self:flex-start;
+    background:#f3ece5;
+    padding:8px;
+}
+
+.trade-image-msg img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+    border-radius:10px;
+    display:block;
+}
+
+.trade-image-msg p{
+    font-size:12px;
+    color:#555;
+    margin-top:6px;
+}
+
+.chat-time{
+    font-size:11px;
+    color:#8a7d74;
+    margin-top:4px;
+    display:block;
+}
+
+.typing-msg{
+    align-self:flex-start;
+    background:#f3ece5;
+    color:#666;
+    padding:10px 14px;
+    border-radius:16px;
+    font-size:13px;
+    font-style:italic;
+}
+
+@media (max-width:900px){
+    .trade-chat-layout{
+        grid-template-columns:1fr;
+    }
+
+    .trade-chat-input{
+        flex-direction:column;
+    }
+}
+.testimonial-grid{
+    display:flex;
+    gap:25px;
+    overflow:hidden;
+}
+
+.login-btn{
+    margin-left:20px;
+    padding:8px 16px;
+    border:none;
+    background:#ff8c42;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+.nav-profile-wrap{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    position:relative;
+    margin-left:18px;
+}
+
+.nav-profile{
+    position:relative;
+}
+
+.nav-profile-trigger{
+    cursor:pointer;
+}
+
+.nav-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#10b3a3,#0c8f84);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:700;
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
+    user-select:none;
+    transition:0.25s ease;
+}
+
+.nav-avatar:hover{
+    transform:scale(1.05);
+}
+
+.profile-dropdown-panel{
+    position:absolute;
+    top:56px;
+    right:0;
+    width:320px;
+    background:#151515;
+    color:white;
+    border-radius:22px;
+    padding:14px;
+    box-shadow:0 18px 45px rgba(0,0,0,0.35);
+    border:1px solid rgba(255,255,255,0.08);
+    display:none;
+    z-index:4000;
+}
+
+.profile-dropdown-panel.show{
+    display:block;
+}
+
+.profile-card-top{
+    background:#2a2a2f;
+    border-radius:18px;
+    padding:22px 18px;
+    text-align:center;
+    margin-bottom:14px;
+}
+
+.profile-big-avatar{
+    width:74px;
+    height:74px;
+    border-radius:50%;
+    margin:0 auto 14px;
+    background:linear-gradient(135deg,#10b3a3,#0c8f84);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    font-weight:700;
+}
+
+.profile-card-top h3{
+    font-size:24px;
+    margin-bottom:4px;
+    color:#fff;
+}
+
+.profile-card-top p{
+    font-size:14px;
+    color:#d2d2d2;
+    word-break:break-word;
+}
+
+.profile-menu-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.profile-menu-list button{
+    width:100%;
+    background:transparent;
+    border:none;
+    color:white;
+    text-align:left;
+    padding:12px 12px;
+    border-radius:12px;
+    font-size:15px;
+    cursor:pointer;
+    transition:0.2s ease;
+}
+
+.profile-menu-list button:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+@media (max-width:768px){
+    .profile-dropdown-panel{
+        width:280px;
+        right:-10px;
+    }
+}
+.login-btn:hover{
+    background:#ff6a00;
+}
+.login-modal-box{
+    max-width: 420px;
+    width: 90%;
+    padding: 35px 30px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #fffaf6, #f7ede4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+    border: 1px solid #f0d7c2;
+}
+
+.login-top{
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.login-icon{
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffb37a, #ff8c42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 34px;
+    box-shadow: 0 10px 24px rgba(255,140,66,0.28);
+}
+
+.login-top h2{
+    font-size: 28px;
+    color: #2f2f2f;
+    margin-bottom: 6px;
+}
+
+.login-top p{
+    color: #7b6d63;
+    font-size: 14px;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label{
+    font-size: 14px;
+    font-weight: 600;
+    color: #5b4a3f;
+    padding-left: 2px;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid #e8d3c2;
+    background: #fff;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    transition: 0.3s ease;
+}
+
+.input-group input:focus{
+    border-color: #ff8c42;
+    box-shadow: 0 0 0 4px rgba(255,140,66,0.12);
+}
+
+.input-group input::placeholder{
+    color: #a09186;
+}
+
+.login-submit-btn{
+    margin-top: 8px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #ff8c42, #ff6a00);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 12px 24px rgba(255,106,0,0.22);
+}
+
+.login-submit-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(255,106,0,0.28);
+}
+
+.login-modal-box .close{
+    top: 16px;
+    right: 18px;
+    color: #8f8178;
+    font-size: 28px;
+}
+
+.login-modal-box .close:hover{
+    color: #ff6a00;
+}
+.typing{
+    align-self:flex-start;
+    background:#f3ece5;
+    color:#666;
+    padding:10px 14px;
+    border-radius:16px;
+    font-size:13px;
+    font-style:italic;
+}
+.trade-contact-top{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:2px;
+}
+
+.status-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    display:inline-block;
+    flex-shrink:0;
+}
+
+.online-dot{
+    background:#f0c579;
+    box-shadow:0 0 8px rgba(5, 88, 40, 0.45);
+}
+
+.verified-badge{
+    font-size:11px;
+    font-weight:600;
+    color:#e29c4d;
+    margin-top:4px;
+}
+.orders-modal-box{
+    max-width:520px;
+    width:92%;
+    padding:30px 26px;
+    border-radius:24px;
+    background:linear-gradient(180deg,#121212,#1b1b1f);
+    color:white;
+    box-shadow:0 24px 60px rgba(0,0,0,0.35);
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.orders-top{
+    text-align:center;
+    margin-bottom:22px;
+}
+
+.orders-icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff8c42,#ff6a00);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    box-shadow:0 10px 22px rgba(255,106,0,0.28);
+}
+
+.orders-top h2{
+    font-size:28px;
+    margin-bottom:6px;
+    color:#fff;
+}
+
+.orders-top p{
+    font-size:14px;
+    color:#c8c8c8;
+}
+
+.orders-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    max-height:340px;
+    overflow-y:auto;
+    padding-right:4px;
+}
+
+.order-item{
+    background:#26262b;
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:16px;
+    padding:14px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:14px;
+}
+
+.order-item-left{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.order-item-title{
+    font-size:15px;
+    font-weight:600;
+    color:#fff;
+}
+
+.order-item-sub{
+    font-size:13px;
+    color:#cfcfcf;
+}
+
+.order-item-price{
+    font-size:14px;
+    font-weight:700;
+    color:#ffb37a;
+    white-space:nowrap;
+}
+
+.empty-orders{
+    text-align:center;
+    padding:24px 12px;
+    color:#cfcfcf;
+    background:#26262b;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.06);
+}
+
+.orders-modal-box .close{
+    top:16px;
+    right:18px;
+    color:#aaa;
+    font-size:28px;
+}
+
+.orders-modal-box .close:hover{
+    color:#ff8c42;
+}
+</style>
+</head>
+<body>
+    <header id="header">
+        <h1><i class="fas fa-seedling"></i> CraftConnect AI</h1>
+        <nav id="nav">
+            <a style="color:  #ff8b42;" href="#home">Home</a>
+            <a style="color: #ff8b42;" href="#artisans">Artisans</a>
+            
+            <a style="color:  #ff8b42;" href="#trade">Trade</a>
+           
+            <a style="color:  #ff8b42;" href="#marketplace">Marketplace</a>
+            <a style="color:  #ff8b42;" href="#stories">Stories</a>
+            <a style="color:  #ff8b42;"href="#ai-tools">AI Tools</a>
+            <a style="color:  #ff8b42;" href="#upload">Upload</a>
+            <!-- CART ICON -->
+   <div style="position:relative;cursor:pointer;margin-left:20px;" onclick="toggleCart()">
+    🛒 <span id="cart-count" style="background:#ff8c42;color:white;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:bold;position:absolute;top:-8px;right:-12px;">0</span>
+           
+</div>
+
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+     <t></t>
+
+          <div class="nav-profile-wrap">
+    <button class="login-btn" onclick="openLogin()" id="loginBtn">Login</button>
+
+    <div class="nav-profile" id="navProfile" style="display:none;">
+        <div class="nav-profile-trigger" onclick="toggleProfileDropdown()">
+            <div class="nav-avatar" id="navAvatar">K</div>
+        </div>
+
+        <div class="profile-dropdown-panel" id="profileDropdownPanel">
+            <div class="profile-card-top">
+                <div class="profile-big-avatar" id="profileBigAvatar">K</div>
+                <h3 id="profileName">Kanishk</h3>
+                <p id="profileEmail">kanishkkansal9@gmail.com</p>
+            </div>
+
+            <div class="profile-menu-list">
+                <button onclick="openSettings()">⚙ Settings</button>
+                <button onclick="openOrders()">📦 Previous Orders</button>
+                <button onclick="openSavedItems()">❤ Saved Items</button>
+                <button onclick="openHelp()">❓ Help & Support</button>
+                <button onclick="logoutUser()">🚪 Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>Empowering Indian Artisans with AI</h2>
+            <p>Discover authentic traditional crafts, connect with master artisans, and use cutting-edge AI tools to reach global markets.</p>
+            <div class="cta-buttons">
+                <a href="#upload" class="btn-primary">Start Selling</a>
+                <a href="#artisans" class="btn-secondary">Explore Crafts</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" class="stats reveal">
+        <div class="stat-item">
+            <span class="stat-number" data-target="5000">0</span>
+            <span class="stat-label">Artisans Connected</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="25000">0</span>
+            <span class="stat-label">Products Listed</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="100">0</span>
+            <span class="stat-label">Countries Served</span>
+        </div>
+    </section>
+
+    <section id="artisans">
+        <h2 class="section-title reveal" style="color: white;">RECOMMENDED</h2>
+        <p class="section-subtitle reveal" style="color:white">Meet the master craftsmen preserving India's rich heritage</p>
+        
+        <div class="grid">
+            <div class="card reveal" data-modal="modal1">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMQEhUTEBMWFhUPFxEXFxUPFxYPEBsVGRYaGhgWGRgdHygsHh0lHhcYLTEtJSkrLi4uGyEzODMtNygtLisBCgoKDg0OFRAQGC0lHR0rLS0tLi0tLS0tLS0tLS0tLS0rLi4tLS0uLy0tLS0tLS0tLS0tLS0tLS0tLSstLS0tLf/AABEIALwBDAMBIgACEQEDEQH/xAAcAAACAwEBAQEAAAAAAAAAAAAEBQIDBgcBAAj/xABHEAACAQMCBAQDBgMGAggHAQABAgMABBESIQUTIjEGQVFhFDJxByNCUoGRYpLSM3KCobHBFvAkQ1OTotHh8RVEY3ODssM0/8QAGgEAAQUBAAAAAAAAAAAAAAAAAQACAwQFBv/EADERAAEEAQMCBQMDBAMBAAAAAAEAAgMRIQQSMUFRBRMiYXGBkaEUscEjMkLwM9HxFf/aAAwDAQACEQMRAD8AzyCva+r1hXMrslVxD5V+tXx9qF4sSIgfykUVayakBpzh6QUVcpqwVWEq1e1MSXqiqOKj7sfWrxX3EE+7H1oA0UaQ8HlV5NUQYx33qxe9OTeqmj4qwvVJFTQ7UkkRDg5A7t2C9TE+wG5oiLg1yo6racf/AInb/QGsj4tstSCQY1Rd++4J9Rvsc0su1Nm0YUPIswBRklkhJbbKkKcZBI7eRFaOm00MjQXE2szV6yWJ9NApdDPC7jP/APnuP+5k/pr34SQZ+6mGk4OqCbb/AMNA8Yt5uHRJNK9xMrFUflXsyaJCO2Cp1L3AOe4pzwXhc1xZNdxtchWV3SOS9dnYL8zA8ohc4OM5zjyq+zwuBzQ6zRxfuqJ8VmB4CWySKo6iVP8AGkif6rXnMVkYKQxw2ynU37d6bfZ7fNxUOvLmEcAAM1xdGVwWBxGgES+Q33GAfcUNFePJFcymCFI4JDbo7PJO8kivh9BYgBFUMckd8e9Mn8Ihja47iCOeCpYfFpXODdoyk0I6BVkUm9eQSDSBmoF8Guect4ItSDVqUEJx6GppdgeRNCkUTdDKN9KEsxhRVouSQek9VURSOBjTRSRQqQNCiST8lSDyflogJFGiTageJg4Fe8uQ+1RS2ZgQT8vaggvUfFTElDNZMfxV81mQMFt/KjSCIJ3qq9/szVUVk2RltqK+D2xnIo0ldqhHGgb+Ve6xVoslxivvgh70KQKQreH8rftVi3ZP4Go4TD0qzme1S7m9kkDOxeIrg0JaSSqukoTp7U71ivjJ6YpB9CqRpK1uZcfIasjun84zmmHNrwTUC4dkqQK3EmfkNFMzlcFavWU1Nps00m0QhGtmO4G9QaB/oaPEpofiR60370ggeFTyJT9amkEvrRkf1qRBopUhGsWdSjEYcYP61lb9z8NC53eymVSPYEjf+SP96261hPFsfKnZdWmOfEmCupCSRnt/Epq9oXerb9Vm+JM9G76LpHjybVw2fYjVJbEBsaupwd8e2a2XB7lYeDxPsBHYs/7Rj/euP2/EJXt1a6mVrZ2jU81JtBZQxTZd9sE7UdN4liMPw/xsXI0LHy9F3jlg507KDjYedbsLCY2to4N4XOvOVt/s9mHD/D7XP4mFxKPd9RjjX3yVQfrQPEIOTBa2Z/8AlI1Mm/eeQa5M+4LN/MaR2vGYpoo7SKZ5wmCkVvDIyKEJYH7wqBp3OT2/SjTudySW3JbqZifMnzJql4tMWAtIILiTnt0Wn4TDvfuP+I/KgLVfIUHdtpkVRRxTFLeIH75P8Nc8Mro0zX6V6PpXqjapk0iUaUVG1fKcV7XxNJJRbNR3qdeZpyChXhNSNeZpqVKo0HeSHmAeVGyUtuyRItJIo0E4FXZzUYtwKnigkoOa+zUmGa8zSQSWN6tV6HBq5SKegvjJvXuag53r3FJFTBqSmq0NfedJJXLU1qnWB51H4kUKRRKHBofjBw0Zr6O6w2Ks4tHrRcd1NFuDlI5CviO1EK9J4bplOll+Wr/jN6RCbaZg0g8WIPuZNCEqxQiQDSQwzjf9f3pkl5SzxXcBrZtvlZD/AKj/AHqbT/8AIFFPRjdazPFrFYeXNFpMUhdQr5coynOl1bzwQfTHrT7LSI8Bj0QKiTMbfSjY/D2B1qWbYHH6YpdeXK3iPHArTSmSFlbQEbQkTKwAzkknBxnfFNuFXWQnKbC3EKxza0LYjRlY409ssoGR2BJNdJpny+WccAmz0PRcpqAwPFHBIWgt7SOzEVuka86Bpka4T5pIJ4GkfWAMoUJjQZJ3Bx3NEgCo3l6DKygSanigRg+cL8PJJGQT2LasbAnbfzoZZX/LWH4jM+R43jNZ+eVv+FsDYiR1KLY7UBfp96lWq8n5alLbM7Bu2ms9aauR9qmZKoS2YZ3qXwTEZzSKQVokrwkVXFbahnNeJbe9IWkrFevCa+FkO+TUltF9TRylSqLjFVmQY70VJaqFJ/LQtsEYdqHKKrEq+tU3qA4Yb6aYC2TOcVaIl9KSSU2t5pG4q5r4ehovlqPKvdAPakggDe+xr74o/lr20l62Uj5TtR23pSpJZxLaU7bVGaKRBkkU1hFSvgDE2fSpN2U2ksjgdhkMKuSzfzeg+GJgZBJFMlFF2DSQVI4Yc7OatXhx82q0SYqYkpueqSqPDgATnOkVXaQo4JAouM7N9KB4TsCPc0uiKMS2T0orQMVTip5oJL1lU91qq6tlKkgY01cpqEnn/EGpWiEJwqQMpyu60L4sCm0cDA1NEATsoOrPfy7VPgm2oe9B+L4i0UcS95ZB+yqew8/mqzAB5rflV9Sf6TvheeAIjaziaMxMQMFXuLRwdxgjU6kEHBGK00nArdJhOs3w0mWlVPiLFoASckAM5PLJJ2ORvisva8dS4tSqWRM0A1TPbQx6GQbcx205XyyCCO52rb+CIB8FzoY4YknZ+aJVjZXxGqpGe2kFsnB23JrfllfDE59GsDHVcjsD3AWocSuopJ3kikRzOoLJA4miV02ZlZVCZOpc4JPUM+tLOH3BJOfWtD4kt1VkKRpGX5xdIguA/LiJbbbdQu4A+Xesxw0bt9a5/VyiVweLogc+y6bwwbYdvYlNA9Wqc1THVoFVFo0pMKiAQh+lV3F9DC6C4lESPn7wo7oMY26AcHcd8D3p9w2wtJxleJQvG+wCctJPoS7nf/DVyLRySt3DhUp9dFC7a7lZThmwOPWjGfNbGHwbZKOm5f8A7yJt/wCSlvEfDsaNiKVnPkNKO3/hxU3/AMyXooB4rB1tIF2qt++RVjwsrMG6dPbV0MfbQd81ECqssD4jteFeinZM3cw4UGc6G+jf6UHw35P1o6c/dt9GoPho6BUAUpRNTQ1W1eqKSKlIK+QdqhIK+Skkl8X9q1Hk0CgxK1F5pJqEV6+nkyjj2qkY8zVsygo2O+Kekl1hFhRRuKG4eRoxn5aIYjHenO5TQvcVI1Ssg9aiblT+IYXYn8A/vOdl/U09kEkn9oJ+Ex8rIx6iB8o2I9LfT/aheENsR71UOJxLnrLah+BJH/XIXBH0NCw8QRDsJT78qRf9qtt8L1FcD6kKsfEdOOv4Whr4GlqccgPd9J/+qrxD+ZgB/nRbzlQCVOluzLhkP0Zcg/vUEmimZy0/uFKzWQyGmkfsiFqJj6TvQ3xueytVkMpJ+UiqxarIcg+Bg6WPuaQeJ+MlbyMINRtSpIU93yGIH0wB+lP7d/hy4dgibuWbqwvsO5Y52HnVEvC4UtHv5FKz3jL8DErlZRhtIlON27MxJ2zp9a19Doy925wwcBY3iOqAbsac9UP4P4tLw+SRorJ5pWeRWQ/Ipz/2aAkHBxvtXW/Bc0ItTrjEDTPcSfDNh9IYldOn0AzgYGx7VlPFng5LKya9mkeS/wAWymRnZsyalDacYOybDf8ACDWm8O8Fg/8Ahsdw+A7Qc1nUHGSDIxwNz5j/ANa3vJh8r2JrHUrnXOduwoeMJbRY4WeRU1MiK+BlCUaMs6nfl4bDZ8iCDtWKhhaNnVsZRip0kMu3mCO48wfQitYOHWvELB7q2RWmVTvKo6micvy3U5wHAx9HBpVxKC3uY47vh5xFIAHSMDTC6pnS6j5Fwp3xgEejDGRq/DhsPl3YJwRwtfw3W7XbX8H90AsmKtE1Aw22v8dWrw3+I1gFtGiuka61T4gt/iLd0zhlBZCv5l8voRkY96yNjwVZrTmoBzkErEOq6W0k6kwACGAGR+tbccPH5jSLhP8A0e6nh8teoD8JWRCD+mcfvWt4fKaLR0NrF8ViyH/RDeAuDrepK0xZFhMSr8OWR2Zs7HJIwNuw86aW/C5G4q9hAVKI3VNKnNlVFQM5OTgsNwDjckds0X9jgHwz52BuY8n0ARWJz7Kpo77Pb3SnEuKsMvNM6RhjuSTrVB9XeEfoK32yuG89BgfJWDtsgLziEUcNzOkDHlRsEVeletQOax0qNR15G+caTjFVi6FWx8PUKBksV7t+Jj5sfctk/rXvwi1yWqmMshJP/i7HSQCKJrf9tVcwMpFA2Tlc5pqsCio4A8qqKyg5JfQVJnb8tUx3H3rL5LRzOcbUUPhBuJCe1eRxyZormGvNRp2E1CT8PYnUDiqvhpfWmgkNRzRwkbSVbVPU0XDEgGxoFDV8RpIK0WkdV3Dxxg7ZOM4XC7ZxksdlGfM/QAnavUyW0r3bT8o1sMnAwv4mJ2UeZ7kAEgaSXVIyRvylhBeS4VTOsYwdIV12aZtwHJGScJpXdtXR6IOHmTGmfkrM1mv8s+XHk/sl9/fpGfvD1Lvy1UMR6ZRtl+suT6IKVLxd5iMZGNwIhzZ/1lfZP8GPpTbiVuEVIOXArOut1njVJo1OQDLK3UZW1Z0rgDI29Mtd2ioRs2nBJXUFfIB3yQcD023zWxHNGRsjBA6UsKUvJt5sqc9ydWqdHYdhqkL/AMxJOr/Ie1B3Do26KF0/mYaj6YAGKMveGtGuWUAYzjLe2wJOCwJ9PI7UNbwRlXaV1B20rvqJHfZRsKYBuBcCcGk26V3DUllJEL6SgySziHbONznDftmiFvprQg6lGrO8DJgkdw6Ls3+Jf1pXaImfvdYXHdApYH1IPcfqKvveHaV1xOJY/MrlXX01odx9dx70CXsdV8+yeACLWy4R4tSTpn0ofzqDys+jpuU+q5X6U2vuJFehAzOy6gEA+U9mDnpVfc/pv25TH6g4I3x8u3tWk8PeI9AEU41xLq0hhr5bEHrQea+bJ2OMjBpk2jil9Qq/sD8qxFrZYxtJsfkfCZQ2VvDc27XkplMjyfEownQJ0AqBKo6sEkZU+XpvV19bPPKptIiInwDqYXaoHcAYDlmCqDnIxn9KO8UTSwwSMJndcQx53ROZIOZzUC4GlkQhSPJsbkNV/GPs0+GiF1BfAqyo6akZZSGUHOtTv377Va0x8sBzzVWKOQqkh3E9Us8UcbvFl+GuJUueWRo0rzULEYyA2+rfGMf600ub6aygjtlvo9U665beVFFrGHG8RADHVnuMBe/rSOKeVzHIpzc25aMOnRqZwDDIcYyQhlJJHZBnNbeH7OLE2yTPLM8kwjyOYoxJqBkYMyjbAYAsPPO+1aQ1MZa0WPgAGz39lXrlLOF+H+JOkrc+G2QYXNvHGjuSfk0xqHzsNmFfcX4bcS2kFpyxJcmVwk8TtKZeptUcmtQUVUbOGxjQNt66ra8BieKIxvIVURsepX5jIQQ7tjLPkYJBGdx2rK+JuKNYEXHK+9llUW4Ua8kdDBzt0tGScDJzjfaue1HimpbqGMDRV9Oqtxws2E3lIEES26zJhQh5VxEuObbzr0uCM5aIsCR5rq2yMhbYjkeobcfQ0m8ToJ7szBWhMylbgaHWJgRgkMNmlAPYdyvmc194au42jMaY1QbEhtYMbbxtq7ZxsR5EVX8Q025vmtHufqtbw3Vnd5bvonmawvisyJekwjLNHHkBgjkadxue22e1bXPvWD8Vu8168UQyxSNNsZ+QZGcduo7bVT8PvzfoVb8TI8n6ozw7LcxwPHBBIEkyx0suo64miJVym3Sx/WtZa2z28VvbgKkXTMyPMjyiYqc4RWBONKndcDNZ7wXxD4JJFlsw0kc28uiN3jaIKoDB16QpLHKkEnzFbnxVYLHcxyxKq/ENNzhpQOWSNQj9yVDKVJCgep9tTUTkbmWeD8EgLC0zf6rb4sIUCvjUQ9RY1zVFdfa8c1U+akTUS+9O2oWlCDE5/iprGTil1wMT/pRnMwM05NVmKsUZqkSComYDzFBJXgYqNUG5HrVHxq+tJFL1Fe8zSM7nyAX5mJ2Cj3JwKqDKB3q/hul5wTkpCrO+n5j0MWA9Tyw4HvKvtV7RabzpQ08cn4Cp6yfyYi7r0+V7fS8u30FgJZly2hS76HGCFHkXXbJxiPAG8jUdFw+RuGxoiLMzzc90iY7hQTy5HDHLsoI8sAAdyMoblHmeSSXpZ3JkK46QwdmCehEaED0GgedX8H8XTWoSNEjKI00nKxoXU6oIw7Lu+kYONs9OdxkdBq9K+VgbCRgigeMdlysUwD9z/qj+PNm3FzLY8iRNCiV1KMZNDctIovNF0qSz74X9kvA+AXEzvJGgkaHQSH06g7bphXYAyEDPVk+inan/AAlbjik4W6mJ5Uc0w0Iv3YLDdE7NJ1gDOSqL6kYbeGrCTh1xLBO2YZwHWWLpXpBKXGWOFHk2TtpGSe5k0+n8iMsdW/nF8dghLKHuDhwkXhGzivGledS7RmFVWUiVhr1DXhhhepQMBRg5oSbhsg4j8HLMxi1E9IRGMYi5gBCqAD2GQPI09m4tbQzzSW+SbgEssI0Q5fDHDsCXw+SCFXv3NJ7rnzFuIhYw6gsCxm5pUARFlAkwBpz5eTfWi+oiS7AdQF9ygy3cZIWd8W8KWO4jWBQRdJG6p6M7FQAdjgkA7+tL+N8Fks2ClgRIH0lGOk4Ol13Azvt703j4opuY55gzNBywu4eLCKQqlcBtjvnLH2qziIbiE8cY6IIEJ15BGkAGV84+YkgYIyMjI71I8EABwwBlPaVjpIiANiBjI9D7j/em1pwPXEJFfJZdS6dsODurZ/1Hn61d4q4Sts6hC4EqFtMh1MOojcjHkM7+hpml4BbpJoPUEGlAFy3y5GNt8Z/Ss7VPc1rSzqVNEwOJDuyv8NZuUl4fMdDMuI2z0gLIsjJj8Sjd1Hll8YzUOc1rL8HJeyNaQy6X0ICVjLDWyB9Wk75IG3c70pN+0ckdwq6ZIHjdh6jAZc+oI2/xVV4zjK3suTlW0OhUAZikUSR9gAToZQT65qYSOewH6EKJzNrqX6E8K8M4KUDWiwSEjGqUiWY/Uvvnf/OtYthDjaOMjv8AIn/lX5F4JckzqCSA/T0MY8YG3b0xjeuu8D4PIyDTczqO+WdWUb9s47dv3qu5204Ttti12VIlUYVQB6KAB+wrL8a8KWUqkSwAIv4jI0SLjfUvVhcd8gDtS+LwpM+7XtwAox0sqDYfQ4NZ/iHwVo7NI8ty7xI6GV+agWRdmUMcLqB74zioZptjC+iSO3/aLGbjtSHxRaxcQuFsrF+Y0Em05ZXVi8YbUJE2J5gwTjvmsz4b4hpum1IEZ0MTqgKqZE04YjydikhPkTnYVp/EVukklrLZMtvIhYO1uViYRCEygOyeYEbDf189qyPh0PPcmaKOaduY7sIkaeUhgGLMwHfUMb4+ap2zDUQHkbhwehCmjHkyjjBGVr5btVBYg4QMx0+g32965tPMZpmZ30mY6mIyyDV2VgNxp7fQV0iTgl/cmOL4WeKOZuuZk0lIz82E7h8ZGWxudh50Rx/hcXxFnZfDyW8CyqJbjlyQIcjSsKSkDVkbE53Zts4peH6QRZdye3RTeIazzjtbwPyhfszsI7nnpFIgVoyHFwFnlLFgA5BIDqd8Aqe2D6Vo/EC6LeNuYsxs+ZgKFSZ0bSqlfzOGC7AYIJGAcEneMOLWXD1VI4keYs55cLiF1QA4ZyMkJ2AHn5dqJPEoOK2DGIiOe3RZNGDrSRBq2H40JGMjIOfWrztO1wDi00TyQshsha+wcjKxZmf8tWDWfKj+JcfiuYRPNH8NOcB1mysco7F4yOrWBvgrvjTvswWWIcHDAjUAwDdLaXGVOPcGuf1nhssHq24vldXo9eycAXnsvRDJ9K8+Gcnc0xAqLCs5aCBmsdRBJ3qp7YKu52ajiN6F4uMRg+9CkrVAtl96tW0U1ZGMqKkqUqQUPhVG2KXXDqGIxTKQmkHEAdZo1aShxAKgUqvzECi4peXASgxz3ZMqCzAGRtxgZzptE/moDi7bJ/eFO4Y0+HtssFC6JX6lRmOJAFDNsvWJCSdgFJIOwO/4KBbnVZpYfjTvQ0e6SIgaIEnSsjuqj8TKGXURnsoVAP1b1FWXNqnw8MpOrmCR20jzACsuB/8AU0g+xPpVnFL0woXie21LkLyo/iWIbU2FmYse5JyFAydxTG4lNoiSXfEJ8TR5RLNDBMJNi2zgZRQR3xkmtN+oijIeSbvAAPZYLYnO4C0U/hAWyxXdhcu0kYXQXdFjk1gfI4AC6iflfINTtODz8XVpGlQRIyrp0uEd1AZ5NAbCqSwKjJ8yeomuXT+Kb1VQmfXzASA6h2K+rZGMn0yfOtJ4V+0C5sgjuUltpDh1VdDoQcE6R2+o2ORUkhLmBzX5ugSPxaLW0cjC1Hifw4bWLKFAuBqMWflI0lmXuNJOc74x37V9xGSNAy6ToZZo16Sq6VjKj2xsf86s8S8XE3Lubd9UTgHv0k5bpZPM6Tj3BFYxuOsSu2pVGdLdbY07gjPUMZBIB896w9c+WdzWvGWH7rR07GRi75Cr4N4Ryiyz6sMMhM6cjH9o574ONgMEjfI2oTxQ62t0nJUKFSFnVT56iU+bOJFUKQT647bF3bcUadsjmOzEnREup3K+ROcBMYwSQoB8ztSDiPhu+dnknhYs+WbS0btnGwCKSQANgMdgKk0kr5JzJqXgDgC6CErGsYGsFnqVHhfAhdM008rSsX25baW07EO7b6diMKNxg0inu2hMkIYFUkZkbfYo53GNsHFHWMVxKptopOUASXDuYV07Fcg7nBLbAfiG1LuOcIa1KqzBg41BlBVfQjqGfIb+9aL2NddkHsq7XEdF4t9qVg56tB3bz60ZB7kdX6Uw8WFnhsW/C1qmdhsY5ZYu/f5UXas5oOdt/wD2rY3mRDY4i5jrauVBOQNV1Owcx93wuMDt65pscJLS1qD32QSszwu2LNjGCRgFjpAD7aj5kBdR2rtHFLCO6gs7WK6XlatNw6o/4Ivu2dTjp1Ke5wCynypNd8RtFjSztSxW6eFbu8lAiYxu68zTq3yQcEkYCjAyMmm32izW6tb2tuiZglSeTlaFKpGAkcWpezFFHc/hX1qRujLyGkGzf2CjdKKXQuL27lIgt0VWNXWXp18wFApLYBwe5+rd9qxvEb5lR2EDzaJEZiBE0oKRxsBgZIKsrEKcHS+wODTHx1xCJ7e2u7eRS0c6MnV0sGyzxsv6YIIyMUHxTxPCUW6sgGlkMSXNm5IaRcEBtv8ArExs6+WM56cQu0QfHVHNj4KTZdrwcY/K5R45fVPIYmCo4RmRCM8xlUaSB+I7kj60d4e8TXHCYUFtJ1Sa5JIyFmi6SFyRkEHGOx7LXnj+xSSXnRIYy41skoME52JfUvZ3XGS6/ODvlgScrZXPyqqgu5KsSNTsGGkAE/LscbDNAacxNax3QfdTF+8ly7Db/a7MmhbmIhpAGXRbk6lb5Sv3++cjam/iTxO7H4KZGga8i1NKqIpWNtWTtK4DDQ+c9sdxsaxtgRcvYoLaVprGW3ecKuplgWOIHpBzgsuRsNq1XivhxvVlnEMguI4okggmUNr1MWLNFnfrZwDnA0ZII2ol7GNafcZ97TCDlYvwlw67u9cqvcBegMyORqLAn53cAAKCSTqx2wabcV8MXolZYVmlTsjSzJK2fMkBwFBPbzxQHhiWY3AS556nUIXDt0xvgMuYyAAuMkAY9jXT7a1WEhJ5dRBChBu2W7EDvjcHHln1rU/XFri4EWMUR+VSczjCwcvgeNYle4FxzHH9lAixMrDGS7kOH38xsfUVVNdoqQwxBmeM4Rd3UhmAKIcsVyxGVJIBI0ncCttx7xVFEhUsGDDIXTo9sj0P1pXwziCQ273FoIszSLGA3UdjqZiAQceQH0NVNUZnQulksjoOmVLpyN4a3B7pTFLt2IO4IbpYMpwyn3BBB+lXaMivOI3okKy8sh5MmQKrfONOHA8gylT9QaCNwfQj+8Cv+tck6CVxsMP2XYw6lmwbiL+QinFC8Txy/wBapa5J/EmP76f7mpPbu67YP90hv9KYYZB0P2Uwla7ghX256R9KnmglMqDqWvYblj5UyiE7cETImaS39nqfPqB50zy/pivJIzmhwkszxYk8sAZLMoAX5iT2A96s41Egjjy5yp0xJ0up1MxklYdwrNnTjHSF9cUVw9GnkUqCHT5P/uuRGh/wl9X+CvIeHxx3aZzpQhCWXrzgx68Eklslf1rqPCY/LiLgaJuvcBc14xPueGdB/Kz8HDJ9JuYR1QOhDKBoD5JXvsflz55yK0fG7m3vYEd/iFuYBiOIK8jOToOt5TkKmsN2bIHlXQfDfhsRokM+7TSGTlH+xjZkyA2nBd9IAGSQMmnT8OEREQjRSw6dCrpIJxsdOQc+vtVmWNksgdJdjIrGOqy2SvYPSML843kEjy6WjdQ7HQjDmygZOkZO7HH747dqGMrxKQVbS2sAMrKvUAD3Hsv7Cu5+MvAyELoyZDhs5VHyuAQjjGknuNWd+5Hccm8XiQHRPkt317ojBTjLRkdMgOQRnvn6mV7QWDYBX5vunB1nPKj4ZvCsciO2IXZFLDqaN2BCSgea5BBHn+1aefw5EjaJb61R3ZWAVneYdio2j2wAoG//AK87t5tAcdw6lRvtk9j+ma1KyxtaRSTwiVmMkJLvJE/3YVlK6TgsEcDLA9hUkTdxN88dMj6ovNV2TK6gtYHKm+VXU5KvbXcLDO+nBTPn5jHamHDeJqdCxSJPqGQsUwWbG22iRU6vYH6Uu4RJHefCQydUcDO335DOEiRn5WfxBgYxtthOwxsl8VWMT3QNsRonGtwo6IyWYMcL2U4yB/FgeVZ79NBI4skZRz+FO2Z7RgpjxW7ujdPLaxuCqiPGgSzaBnJdSCVJY/5Dfasvx6adnPxWoSbbOuhguDjC4AA+lOoLgIEjilEpXJTp0vHjDMpIyGRhqwM7HHvlT4lvTLO+QMJlAFzgBTtjP/PerDWNbGAwYAr3TS4uOTlALsFx7kn69v8AIGtVxXh4aSLWdMdqkMLs/wDZBlVW0g4OCzNIMYPyk0q4FbrrV33SHMsu34U+VPqdh/jFQk4pJOmlt2aUOOoaNbs2dSsCDu3t3Peo9xjYNpyTk+yNBxPsFoJlndkaC4REumcRxWsjqq6dgAhxsdPbbc9t8U08IIXdrad5TKrKwKCBoY4wrGV5i6NjSdOQTvqwN6yss6QTSYwnTG2lM4EmASE8xhiSPTatBxHi9vfSJIkBW65bfEROGSGUphiwKMpLFdZww3Ax3wajE+odIGiy2uRivlPeyMRDi11jgdsLmC2liEMgkiTW6RRovNyVdgCOncMDjfYYrJeJ7bRMsZieUXQeGGe2lkiHOeQaY8BgiKBqOcHVpG2xoa48WYsjJBoi5KLEYHeJoGQtjTGsZV1IyDlvfv3oPwz4tNvEk0gklM5PO3CRIImCx8uMjDkLgkg/iA2wDRlfLGwurAPejaYyMSVXP8KzinhS1jt45FuFkMJxIbf5XlkdTHpDnpXSctg9htvWB8N8MeW+SIJjTIrMAC2gKc6STuMdv/Wt3b8NbBihQOryRyKyOrRcmIt1vnGhWD4yd+g7dq0cfCDZvLcl3luZtLusUgs4tuwJ05b1xnPsKia6WQXIa7We/RPl8uM03KK8N2Jhv3nidZIZtML6HGY50VFCuhwfmRwCMjDGm/iud4bq0ukzy5OZbybac564/m7ZZWAPuPWsNY8ZXL65Le1dcvo+HklZsEkOJDKMtuxx3GSfWqB4pvG+7NtJdwPupt0uIM4Oc4IcZyM/tvQd4eDubeSPp9Ewagkgkeyp4jxW5j4s7BrcG6SN9wZYdEY0qpRsF5AU2wRudjgkULxjxPcTNzZXVGAQhUXRunysfPODnIPt5UD8FbXEokt7mSG53URcVGpCRtoWVsjIO2G/agl4ze2Nwgu0R5LfZUvl1KBjHS+cFe+DnANauleImgOaCQKv4UErNxwaXR/CfC/jbdrh3iTUcD4dEluARuVcyBgrHY4xkjzpJ4lvZ4dop9asNSSxr8K4xs8bKp+YbHHoQaVR+JHaV547doTMumQWoMts5ByrEJ2b3yD7983vfW1wv30gifKECdG1FttXUT0DA77k588UWyTNk34Le2LCj8scce6aeHeJ8SEQuDHcTR41KXZpImA2JOWBCj18/Q0f40uluUHNs9GuNirqrBw/cMj6RkZG4Pf60b4U47DFCY1ktEOSVKyOMtgdcjFQDlsnG22BQXjOURxRcifnSN85t2Mrl9jkld1VRkAZ/beqshkmr0UbxX8qT0t62FiOI8Uju7MK9upuFXSHRAkvMRh30jfKMux7nPnilXD+GTpIUaynkaNcujJKmlT2fCYKjY/Xeum+EuBBoo7m5kLXEc2sI6Rryyh21tuzgrpO527DBFOeN8VCAPIzktsq26PPKe52VOw3O5IrP1GsfE8xCMuN3jgfVW4o9w3bgAuFjjU6yYt5pVGdld+nPp1bY9M0Ra+LrmNiG0PvvrUd/qmK13ingq3keuGF4ZE5r/ewNDLKzkHSfI5Oo5JO5xtWaHg27uHVjHoLgBtZXJcbatIP4tj9c1bjaJWhzmY4IIyCkZXRnD/sU84L4pjuGCOOW7dtwYz7A9wfr+9PaVcK+y6aB0a5dEw2oNv8w7KoO7t54UHtTPp9yPItnUR5E+57/rWTr9JHGQWmr91saHWPkBBF0hVtHt2WbUq8s4J2ZkyRofcY2fSPo59Kb+FrKMGLnqDLBcxu7P8AMyuGEcm/zDmbH0IFZzxfPzLZ13OkoxA2JCnfcemc/pSzg/i4ERrLGWeDGmTmRplc9nDDBwN9jnIz61r6Da6HZfBx3WLr2uc/d1IXfrPhqthzIeY3UR0jD5znHfY+/aiZEcsCQSV3JU6V9DpB8thkZrmnBftLt90ukkk0EhXROauNz1BWOrfscdgM7itbw/7QbORQNTB84VWikX6HOCAP18qe+KS+LVZtbU7SzWXOsswYA7Hox2wDkk9s965P9qKLa3DSLhtHw7hWJziRXilQnuNQSM+ZBUGul/8AE1rgAKxA2BRNQ28hg5rl/inhj3TmSXJXmK7ppdJJEXpVdRACnTqyc/i27VNp4XuJDwarhAvaCCFgbrgksytOVEakKy87pdlbV1DSMHYDy3yMd62EtosNstueQ0sOWK3TBXaWQBnVQUI/KudQ3XHvVdpsGkaeEaWQAXMicoJH8iBQzkhTp3wS2kD1z7ZSxKzySWyyyqHZJneZGctgaXUDA2ZzkgbbYz2Qgc1p389AD090XODiNvCz72eJUWCDWFZyrI33UkmMkK52IAXCjYnGdyaa+IuG2q2+uK5VpmkjUKj8pgCSDriO66c/lBG9KpOJKkwwoRfldLRdLiPA2JIAbvncbY8q1tle2GNUUqqW05127PL/AIpHRsntuDRfG47X5x2z90QQsmlksCc9jkrlY+bhGZiBpJ3yQMFt+wIH1zMi6m0ruM/Njue5JPc/Sui8SuICSRIshbV/1Otif0jrNcQtWUGWGNk0fi0CJR9FO+foPKkxpeQKIA7j7kpxcO4XjcKmaLkW6lmbDztnCjT8seSeph3YDO+B+GjuA+AJrlGVZYgc5IDLr6c5OHKkqN+w7+dX+D/GCWynDPE5CA9AngZR82oDDKcnOVOfrWp4Re29xcK7ygaTrBiIVCwII+fSR6g4B8qZKNzvSLHAI6fITN7mpfwb7LpkL85ziRSAGSPQ+MMAXMmVBOBkA++KdN9lvLc3N3e8tlbWGCpoB2PUWIG3bA8h3roVncwZV2lVmYjSGZO57EhSaQ/aPZNM0JQh0jOXTWqZUsu4ycE4B7/71n6qSSPLME4JUsID/wC4rk/FuAixuFfMcih3ZE2ePlg9OQd1U5BXOe3713Vuyxy6J0cXH3qxxfcorEHURGw28gQp30+eBU/FZlkm2jkm+QnlIV29AyggHG2e+O/lS/gNsfjrWOdXVTLGDFOVZsFs4OADjJ7EDvV3c6Zjdwzi+xCb/YSQVpeMxzW0UUMQaNco0kynrlmRRpUefKj2C7YLAnyo+wW+vggYFwuzSXGIohk4JAAGpie53z6VdZ3wuLiJ7lcLGrIqsS6lyxUHtjyJ89zW74g0Cm3QM2uYOyCIDRpj0nmNvhUGQMnvkbZzUjs+l7RQJrr91Bk5Byub+K+DDhbtJK0c8yR81Ro0hSziNGbI6hqLHG2dO9c7ueNXbnmNNMc7atbqPoMHA+grpXiTxAt3xDVHCZ4ZomgZMa2Iil1aiB8q53U+4+laG9NvfxGKSOUxOpIeFkdkkUHGYdiMHYEAjyOBUkRDWV19lJx0XNOFeI5L1HtLs81pEfkvJhn5oUlQxOc5I2b5vLJBwJcAuzdW7296ObBAqMsmNV1bqx08xD3eNTjUnocjsRRvg7wTcRzpPPGVMesxRZXnSSKpKgLnpUYySfShbcSWExOnTrCB0YfMpOc4zt5gj3pkr2xNPFpwNlLYZJOGTtDKqEL1HAVlkUjKOrdyCCCMetGWfiK6eQyO8sUDsmQmp4VUnGwk1DOM99ia9nYXlnIi5MnDJHMB8zau5+7z36SCR9QKTcHjNwVRn6kOwc9IPrg7Eeo2PpUB/pW/v+E8erC33G+KxJGhhjiZ3d88+GCZCiADzTZiSNxgZztRHCIecRqXhyI2CW6YWH+GKQHP6D3rKxJJHKI5gBIvyFnDQkE5AR22Awdsnv3INaDiHHy0Zhkt01ptrlXlSofUaDnO+dyQfSow+RoAb9ST3SLLP8LStAdJNvDHKqag76LqKIYHk3OOr6UIt+eorbRMY11sUFw+kZxqP3p2zSLgF9OTyY0EpbPQ6BsEgEsNXyDGCTnHrWx8PhrS7jhudCtPG74imOgBAxCuCADnDbZI2qNxnjflwIq/chINa7pSKspo7mVY7bThiCx5CO+kAHWHYMMEHsf86+4zegTLCt04SMu0otzHBnSAFiUxgHdiASTtv6Uzh47DGA0URS3cv99GgWHIHcKu5Q9tWANqB8Z8M5gt+UseXlckIv3smsBjuMZU9yfdaz9PrpJZPLog5ong/KkfFtFpRx691yoWjIEMMiJp/sBqAV3Evd2JwoAOABkkk4pFzK6PxjwmJoI0jPLMA6EzrTcbhm/Ee2/ljzrnF7YvE5SRSrDuDn9x6iotWJHFtjgLW8OMbWmykN9Id/T/AJzSLgojt5CZNBAGAG06sb/m237fpT6/uPLArP3FyUdXGkFO34lIPdWHmpqWF5aS0cFQSx7m31ClxONrmQuUCDsoiCMoX+Jl+ZvenXDeGRRgMl7LC/oj6mPty0OQPqaVraPcb28PVkErBNG6d/wrkMv07VteCRsgAnsLiT1SWFpR2/DIpBFbBfKNtWAOg/lZhAzaH8ORvc3XLlluGtlVtcqzPFLrwdIUEnJJ2x75J2rV8G4JY3KS28trp5Yw0zuWnLDKlpH2IYEE43XY+lAQyyZUw8GniwX1FHMQw3mof8ePPI3PtUeMcY5aNGY4beA/OjyxzXT77qyoXO/p396Zq/1czm+Wa+D27/KEflNB3LIcauVs7d4omSR3bRzVA6kzuEA+QMBnv2PvWV4h4juGGGOnV9f96c8R8LX1y+siLTjoXVhQvkAMUsv/AAndRjLrEAPysKe+jZcTfuE5g28BBcJumbVEsaSSXLoqs6hnGcjoP4SSRv5YrpXC/Clu9tpS6kN2qjGtwlsr5GUOxOF6snvtXN+HRmMrIDgxuA2D1AnfIOQcED/WuxcMugbd+a7xpDIhQLy+aARgBg22M43X1O/equp1MsTRsJ733KkZEHE7grra2/8AhKCK+l5mSzx8pnC4ONShCDhg2SPLesv464rCbhZNDPbQxqRGXOJZHAZdYBxpGRt/AR5088bcZhNvCkqM11gDUoZWVF3+ZsB8ggYGdz7VhLmQ3K9EWsQq7sZSzJ0LnBCkd8YAzU8OtkkYXuPIrtk9VXdDtfj/AELLC1eZ5JIUIXWdl8gxJAx9PKieG6yjosLSSdlKM+pTnBzGDv7AjzqFvxaaFCEwodtZ0qB3AAwMYAwKBe8YvrJOsnOr5Wz6nFMa4tNBTluE8FwYFxcc1ZeoaVKxMBgY1ZU49f2om244wQPNNOX6giQSLHgDtqJBIH6eX7Qi4vMEQ28sh0hcwy4nQHtlCScD2IGKtl8RXWk4k5TPnK8mNWbPfEix539zVoGU1d5OVEQFdwniM03Me6vblYkG0aSyNK2f9EGdzjzA86A4gq200VxE0h60YGVtTHG4OTv6V7acRjhhkW4jkMsoUEgquYxpIUnOR29M4oI3C3LFnKpjpVB8gHr9apyul87dZAHTorDAwsqhZXYOJcOF1DGYFDcwEAp06NYUqG3+UnO+O7EHFIooJ7W0usajoXSjLqfSmXJQE5wCd8ZzkZPvV4S4oBCLd2EirsmlijkHvGHHY5xgHpPynyNRs+J3NzdabO3AhjXRNayzoqvr2dgzaST0grjOkqNu4p0Rn800R5ZzZ/ZROawN91jvCPFzBNvlhJhekF3G42A77gAftWwsJ7f42ee51xx4TRCvMXVIAAWZVwW2BOMedDWHhho7sPbZjdMlop1Cyxg7BgW2z3IKkjY9q1N74cveIcoSmMCEkvM7jUQR8hCnf1xmrBc4TAbfSRkphrYTeeyI4XOqZ4laRlQ8gt1R1MrNHtkomrKu8nodtI2xWP8AFxleeV5YDE7aXdGbVjONQGQOnfyyPfFdDv5Ra29ulny5ktpA7OZI01SIQCiA7NsxGRsuAc7Gsl9o15dPIDPG6Io1IEIlTSTpxrQkZJ23xnI+tRSaiCwCAckc5+yY1j+c/wALN+HkB0INmaK4ifCltQ1JJk+uGJ3obwx4mW2jVDpZEDHAwkpJJOCGOPMbjOwpjYwrZ2s90SWdomhXc6VlkY5C/QYJP8LVgba7Zdulh6Oiyj/xA4/SpXM3ta1x909pq1p4ro3ErzXKDS4YqNaQIAPlHcHAGfcnvmth4Q4hZW0Ykd1aZtKoWXnRR7YXpByfcjsNh2rnVjxEI2r4dCV36DJH/kGx/lTyHjEEmzWOdX4lddYPqGaImlN4e6ehmhWAaT2zbAfdaqO6uoXlmAL/ABRGt4NM8RwcgB0Y6R22ONhUbS9f4g3FwDzE06BL0qMAjWc98dRA23PtSK2gtEOoW0wOx6rl03+ojGaOmvkMekWsRCkH70vP2/Mek/8AtUn6B4NAcir6gKEyjldA4fetJDJG8omE/THHE0WtUAxhUjwc58mwo07k71quFcJ61mmADogRVVtelF2GpuxY+eMD9q4/wjit04WOFNAMgBS2jjghZdQ6dKKCx282Peu6WudsjBIBx6EjOKpv0I059zamE28IzFVPbo27KCfUgVdX2KjRtcqvPA6sdiPfft/yaSXn2Y6/P9iRn9fKtQ/iiTTnlxZyPKT0/v0MfFsu33UO5A3Eh29svTA1o6KXzH91jB9kkgfpcaQc9eGIHpkd/ritJYfZpcKBmaPyyMybe2w39Nqar4ulz/ZQ/tJ/XV3/ABjNn5Iv2k9P79XG6xzRg/hV3RgqA+zgu2ZJY127RIx2PszbUzt/s6tF+fU/tkIv7KM/50AvjSf8kXb0f0H8dejxtcbdEW5H4X/qpsmulHLvsmCFnZaL/h2ME6VAHTgeg9KDu/CMUgIIPb1od/FE3T0x7+zf1UTbeIZH7qnl2DD1/iqLzC7lS1Syl79j8MhJSR4i2x09Ske60ZY/Z3PCVxcxSFNWk3ECyuMnOzNkgZ96cXXiaVOyR+XcMfX+L2FADxrPj5Iv5X9f71MLr9JTtxVN54DvJplmmvUdkGFV4VeJQdzoTYA7d/Pzqi1+zlAsgNxJIHdy6piKLXnqARewz5dqMbxtcYHRF/K/9VUnxxcf9nD5j5X7fz0RJt9ND7JvKHuPs5TsAAO3UP8AzpRcfZUhOdC9/wAJ/wBRT9/HE+D93D/K/r/fqL+Objb7uHz/AAv6D+OjvHNJBxWVl+yZWwQHQ/wsjp/K3/nUh9megYLP9eVF/rmtT/xzcf8AZw/yv6f36+PjWfSPu4e35X/rqYatzRymkArBXn2bKpJxIx/iKRLj6KP96yXFfCckbHSu3ouWx+9dobxjKQMxQdXfpf3/AI6CbxCZB129udXfpf1P8dQyy7zkqRjgOi4gLaSEhgCCP+dx5j2rT2PHIrjSLgmKVTlZd9Ofc5z/AJ592rU39zC4Oqzt/Ptzl9PSSs5f20Bz/wBGjHfs0w//AKUo5S33HZTvjDxlXycImaQTzl5Uc5aWJublDliAW+X2BAx6GmXFrmBrcpFHdB2GzSya4h2yWGOr02pEf+jkcgtHjySSQr/KzEf5UHF41uQf+rOkead/rvvV8are8Hjb06LPfBsvK1/h29HKKDQG61b4lWnTQRkaY8/2hIAyMDB33p21q9woVQYluIwsi4PKyCCdEbZK+eCcZyTWS4L4rmn/ALVUIGvpXmRod/MK4zWssfFTRf2dvbjvuVldv3aQ1Qmgg84yEZu1PG9wbttaqy8HxtEqlQEQYUfh3G5+p9aqvPsvsX3MaDPc6Qu+du2KC/48uMf2cPn+F/66rk8f3P5IfL8L/wBdOdMbQApGL9lNmO2R6aSdv0OauT7L7LzVj6nW2/vjsKC/48ud+iH+V/66qX7Qbn8kPc/hf+uj+qeOpS2BaA/Z5YkYMbfzvRdp4KsYjlbdSfWRnl//AGJrMHx7c4+SH+V/66sHjq4/JF5eT/1006qQ/wCR+6GxvZb23so0+RFX+6oWiQK53/xzcfki7/lf+uvB46uPyRd/yv8A11HvvlOAXRq+rny+Nbj8kX7P6/3q9/40n/JF+z/1UtyNL//Z" alt="Rajasthan Pottery">
+                <div class="card-content">
+                    <h3>Rajasthan Pottery</h3>
+                    <p>Traditional clay pottery crafted by rural artisans using ancient wheel-throwing techniques passed down for generations.</p>
+                    <div class="card-footer">
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                        <span>₹1,200+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reveal" data-modal="modal2">
+                <img src="https://t3.ftcdn.net/jpg/15/54/87/72/240_F_1554877223_BL7QUVXBGO2vur40INARx8256usge1wJ.jpg" alt="Kashmir Shawls">
+                <div class="card-content">
+                    <h3>Kashmir Pashmina</h3>
+                    <p>Handwoven shawls with intricate embroidery showcasing centuries-old Kashmiri weaving traditions.</p>
+                    <div class="card-footer">
+                        <span><i class="fas fa-star"></i> 4.8</span>
+                        <span>₹8,500+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card reveal" data-modal="modal3">
+                <img src="https://khirki.in/cdn/shop/files/Artboard3_05368a32-ee51-44dc-9b0e-0a98b21a0333.jpg?v=1730457108" alt="Madhubani Art">
+                <div class="card-content">
+                    <h3>Madhubani Cloth Paintings</h3>
+                    <p>Vibrant folk art telling mythological stories through natural pigments and intricate patterns.</p>
+                    <div class="card-footer">
+                        <span><i class="fas fa-star"></i> 5.0</span>
+                        <span>₹2,800+</span>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<section id="trade">
+  <h2 class="section-title">Trade</h2>
+  <p class="section-subtitle">
+    Connect directly with nearby suppliers and factories for raw materials at fair prices.
+  </p>
+
+  <div class="trade-chat-layout">
+    <div class="trade-list">
+      <div id="tradeContactList"></div>
+    </div>
+
+    <div class="trade-chat-area">
+      <div class="trade-chat-header">
+        <img id="tradeChatAvatar" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=300&auto=format&fit=crop" alt="supplier">
+        <div>
+          <h3 id="tradeChatName">Ravi Textiles Mill</h3>
+          <p id="tradeChatMeta">Cotton Fabric Rolls • Meerut Road, Ghaziabad</p>
+        </div>
+      </div>
+
+      <div id="tradeChatMessages" class="trade-chat-messages">
+        <div class="chat-msg other">Hello! We supply cotton fabric rolls directly.</div>
+        <div class="chat-msg other">Tell us your required quantity and preferred meeting area.</div>
+      </div>
+
+      <div class="trade-map-mini">
+        <iframe id="tradeMiniMap" src="https://www.google.com/maps?q=Meerut+Road+Ghaziabad&output=embed" loading="lazy" allowfullscreen></iframe>
+      </div>
+
+      <div class="trade-chat-input">
+        <input type="text" id="tradeMessageInput" placeholder="Type your message...">
+        <button type="button" onclick="sendTradeMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    
+    <section class="testimonials reveal">
+        <h2 style="color: white;" class="section-title">What Artisans Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <div class="testimonial-avatar">RK</div>
+                <div class="testimonial-text">"CraftConnect AI tripled my sales! The AI descriptions are better than what I could write myself."</div>
+                <div class="testimonial-author">Ramesh Kumar, Pottery Master</div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-avatar">SA</div>
+                <div class="testimonial-text">"My shawls now reach customers in America and Europe. The AI tools made it so easy!"</div>
+                <div class="testimonial-author">Saira Ahmed, Weaver</div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-avatar">MP</div>
+                <div class="testimonial-text">"Perfect platform for Madhubani artists. Global exposure with zero marketing hassle."</div>
+                <div class="testimonial-author">Mina Prasad, Artist</div>
+            </div>
+            
+          
+        </div>
+    </section>
+
+  
+
+    <section style="background-color:  rgb(231, 212, 188);" id="marketplace">
+        
+
+
+
+
+<h2 style="color: rgb(72, 69, 69);"class="section-title reveal">Marketplace</h2>
+<p class="section-subtitle reveal">
+Explore handcrafted products directly from talented Indian artisans
+</p>
+
+<div class="grid">
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/10/94/09/12/240_F_1094091248_bvRfKOh9CTioVeHofBFsSKCyvK6hi0DG.jpg" alt="">
+<div class="card-content">
+<h3>Madhubani Painting</h3>
+<p>Traditional folk painting from Bihar using natural colors.</p>
+<div class="card-footer">
+    <span>⭐4.9</span>
+    <span>₹2500</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Madhubani Painting',2500)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t4.ftcdn.net/jpg/03/77/24/81/240_F_377248128_Y42dmqYb3HTnShHhGUbaIkTZLDBNOSHn.jpg" alt="">
+<div class="card-content">
+<h3>Pashmina Shawl</h3>
+<p>Handwoven Kashmiri shawl made from rare Himalayan wool.</p>
+<div class="card-footer">
+    <span>⭐4.8</span>
+    <span>₹8500</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Kashmiri Shawl',8500)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/19/31/17/30/240_F_1931173036_Fix4CyGfaHvIL554TPXHoOavHZXzv2aM.jpg" alt="">
+<div class="card-content">
+<h3>Blue Pottery Vase</h3>
+<p>Jaipur’s famous blue pottery crafted using quartz powder.</p>
+<div class="card-footer">
+    <span>⭐4.7</span>
+    <span>₹1200</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Blue Pottery Vase',1200)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://images.unsplash.com/photo-1510828998924-405b610a5eec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2xheSUyMHBvdHN8ZW58MHx8MHx8fDA%3D" alt="">
+<div class="card-content">
+<h3>Clay Pottery Set</h3>
+<p>Handcrafted terracotta pots perfect for home decor.</p>
+<div class="card-footer">
+    <span>⭐4.6</span>
+    <span>₹900</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Clay Pottery Set',900)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t4.ftcdn.net/jpg/16/92/55/37/240_F_1692553797_CnoKMDJKBrNRJyZGeK7GpCEvlBPo8YX9.jpg" alt="">
+<div class="card-content">
+<h3>Banarasi Silk Saree</h3>
+<p>Elegant silk saree with traditional gold zari weaving.</p>
+<div class="card-footer">
+    <span>⭐4.9</span>
+    <span>₹9500</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Banarasi Silk Saree',9500)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t4.ftcdn.net/jpg/19/17/99/65/240_F_1917996502_RqJxZNgE6js9ZC5I3CjeJf70RfC9U3yr.jpg" alt="">
+<div class="card-content">
+<h3>Wooden Elephant</h3>
+<p>Hand carved wooden sculpture from Rajasthan.</p>
+<div class="card-footer">
+    <span>⭐4.5</span>
+    <span>₹1800</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Wooden Elephant',1800)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/17/65/44/36/240_F_1765443608_VAImTnXhRgvn159HSs3iebLVxYDjNcsx.jpg" alt="">
+<div class="card-content">
+<h3>Handmade Jute Bag</h3>
+<p>Eco-friendly handmade bag woven by rural artisans.</p>
+<div class="card-footer">
+    <span>⭐4.6</span>
+    <span>₹600</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Terracotta Horse',1500)">
+
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://media.assettype.com/deccanherald%2F2024-09-27%2Fayv9uybb%2Ffile7xd53i5m2usn881fbd8.jpg?w=undefined&auto=format%2Ccompress&fit=max" alt="">
+<div class="card-content">
+<h3>Terracotta Horse</h3>
+<p>Traditional Bankura terracotta horse sculpture.</p>
+<div class="card-footer">
+    <span>⭐4.7</span>
+    <span>₹1500</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Terracotta Horse',1500)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t4.ftcdn.net/jpg/10/25/98/11/240_F_1025981158_q8rWArKOsBVcsHun1eN4xlib9q4shsPv.jpg" alt="">
+<div class="card-content">
+<h3>Handwoven Carpet</h3>
+<p>Kashmir wool carpet with detailed hand knotting.</p>
+<div class="card-footer">
+    <span>⭐4.8</span>
+    <span>₹12000</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Handwoven Carpet',12000)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/16/20/37/28/240_F_1620372891_lYImh0gGYmLCCaO5yVSE5jdVjccjLn5Z.jpg" alt="">
+<div class="card-content">
+<h3>Handmade Jewelry</h3>
+<p>Traditional tribal jewelry handcrafted with silver.</p>
+<div class="card-footer">
+    <span>⭐4.6</span>
+    <span>₹2100</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Handmade Jewelry',2100)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://as1.ftcdn.net/v2/jpg/04/93/34/50/1000_F_493345057_SS9uHkdl7Yu8aVCmStKXrdIMCh6ogMDl.jpg" alt="">
+<div class="card-content">
+<h3>Hand Painted Lamp</h3>
+<p>Decorative lamp painted using folk art patterns.</p>
+<div class="card-footer">
+    <span>⭐4.7</span>
+    <span>₹1400</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Hand Painted Lamp',1400)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/19/18/85/58/240_F_1918855855_1aO2db1oMW6NQdAhFyan0KyWzmHbYojz.jpg" alt="">
+
+<div class="card-content">
+<h3>Brass Diyas</h3>
+<p>Traditional brass oil lamps used during festivals.</p>
+<div class="card-footer">
+    <span>⭐4.8</span>
+    <span>₹750</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Brass Diyas',750)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+        <img src="https://t4.ftcdn.net/jpg/19/31/67/31/240_F_1931673125_zhwz0RvxHma6he1mtS7ixeDEk3YgzeiT.jpg" alt="">
+        <div class="card-content">
+<h3>Hand Block Print Fabric</h3>
+<p>Rajasthan’s famous hand block printed cotton fabric.</p>
+<div class="card-footer">
+    <span>⭐4.7</span>
+    <span>₹1100</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Hand Block Print Fabric',1100)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/19/15/19/02/240_F_1915190275_UAYMxlru7sKoyZjZHdY181Tyg5pu8tF3.jpg" alt="">
+<div class="card-content">
+<h3>Bamboo Basket</h3>
+<p>Eco friendly basket woven from natural bamboo.</p>
+<div class="card-footer">
+    <span>⭐4.5</span>
+    <span>₹500</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Bamboo Basket',500)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/18/38/67/92/240_F_1838679216_XACWeSc1gY6JdCpoGusqKL6bLSu3nLOA.jpg" alt="">
+<div class="card-content">
+<h3>Handmade Leather Bag</h3>
+<p>Durable handcrafted leather bag made by artisans.</p>
+<div class="card-footer">
+    <span>⭐4.8</span>
+    <span>₹3200</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Handmade Leather Bag',3200)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/19/28/36/12/240_F_1928361250_FA4a5sY2UVvEM8TJzwFQYBNqEYthJ65z.jpg" alt="">
+<div class="card-content">
+<h3>Stone Sculpture</h3>
+<p>Traditional temple style stone sculpture.</p>
+<div class="card-footer">
+    <span>⭐4.6</span>
+    <span>₹40000</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Stone Sculpture',40000)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/17/56/00/14/240_F_1756001408_teLJMXpdLUU2B2JgHJV7P3O3Cd5U0yxy.jpg" alt="">
+<div class="card-content">
+<h3>Handloom Cotton Saree</h3>
+<p>Comfortable handwoven cotton saree from artisans.</p>
+<div class="card-footer">
+    <span>⭐4.7</span>
+    <span>₹2600</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Handloom Cotton Saree',2600)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t4.ftcdn.net/jpg/19/15/27/81/240_F_1915278158_ckvbi7aNFCDBjjq2Heg1coqG0BnWC8dD.jpg" alt="">
+<div class="card-content">
+<h3>Decorative Wall Plate</h3>
+<p>Traditional decorative plate for home interiors.</p>
+<div class="card-footer">
+    <span>⭐4.5</span>
+    <span>₹1300</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Decorative Wall Plate',1300)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://images.unsplash.com/photo-1510828998924-405b610a5eec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2xheSUyMHBvdHN8ZW58MHx8MHx8fDA%3D" alt="">
+<div class="card-content">
+<h3>Handmade Clay Cups</h3>
+<p>Eco friendly clay tea cups crafted by potters.</p>
+<div class="card-footer">
+    <span>⭐4.6</span>
+    <span>₹450</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Handmade Clay Cups',450)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t4.ftcdn.net/jpg/17/17/86/47/240_F_1717864775_FMgXnhqAkBjs2d1uIKkzoMPibsoKfKmx.jpg" alt="">
+<div class="card-content">
+<h3>Traditional Puppet</h3>
+<p>Rajasthan’s famous Kathputli puppet craft.</p>
+<div class="card-footer">
+    <span>⭐4.7</span>
+    <span>₹950</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Traditional Puppet',950)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+<div class="card reveal">
+<img src="https://t3.ftcdn.net/jpg/13/90/59/82/240_F_1390598259_y69gdNsPaeBfOTEjfm0wIYCFlcuHHFYf.jpg" alt="">
+<div class="card-content">
+<h3>Painted Wooden Box</h3>
+<p>Hand painted storage box with traditional motifs.</p>
+<div class="card-footer">
+    <span>⭐4.6</span>
+    <span>₹1700</span>
+    <div class="counter">
+        <button onclick="decrease(this)">−</button>
+        <span class="count">1</span>
+        <button onclick="increase(this)">+</button>
+    </div>
+</div>
+<button class="add-cart-btn" onclick="addToCart(this,'Painted Wooden Box',1700)">
+Add to Cart
+</button>
+
+</div>
+</div>
+
+
+</div>
+</section>
+
+
+
+<section id="stories">
+
+<h2 style="color: rgb(62, 61, 61);"class="section-title">Stories of Our Artisans</h2>
+<p class="section-subtitle">
+Inspiring journeys of artisans who transformed their passion into thriving businesses.
+</p>
+
+<div class="story-container">
+
+<div class="story-card">
+<img src="https://t3.ftcdn.net/jpg/02/44/53/02/240_F_244530295_KzQSMIpVLE1Cm2lY3QFqu5mlCJ8ThtLs.jpg">
+<h3>Ramesh Kumar – Pottery</h3>
+<p>Ramesh learned pottery from his grandfather and now sells handcrafted clay pots to customers across India.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t4.ftcdn.net/jpg/19/13/52/23/240_F_1913522376_4z2BJvU01eyYDxwsku3EX3WtXnCDGQtl.jpg">
+<h3>Meera Devi – Handloom</h3>
+<p>Meera started weaving shawls at home and now runs a small handloom business supporting her village.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t4.ftcdn.net/jpg/19/33/46/77/240_F_1933467790_QmK1g0eZbCKuJ4GIgPhlQPI1hIr3unUs.jpg">
+<h3>Imran Ali – Wood Crafts</h3>
+<p>Imran turned his family's wood carving tradition into a modern decor brand.</p>
+</div>
+
+<div class="story-card">
+<img src="https://as1.ftcdn.net/v2/jpg/16/98/61/74/1000_F_1698617419_yELGqJEb1ijzVukQP7gcvZ5pOuynfTTE.jpg">
+<h3>Sita Bai – Clay Art</h3>
+<p>Sita creates decorative clay idols inspired by local traditions.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t4.ftcdn.net/jpg/19/12/90/51/240_F_1912905126_SihQ7Lsbwldbit8IIioHjbxpK1y1SZm5.jpg">
+<h3>Arjun Patel – Metal Crafts</h3>
+<p>Arjun's handcrafted brass lamps now reach customers globally.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t3.ftcdn.net/jpg/01/46/99/48/240_F_146994884_YTj4hUQcYL3L04gqJEZUXb6igYo6iFv7.jpg">
+<h3>Rekha Sharma – Embroidery</h3>
+<p>Rekha preserves traditional embroidery through handmade garments.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t4.ftcdn.net/jpg/12/43/76/81/240_F_1243768169_BFMOW3FIyrOqe8NBj3noxfkk0sdhQhh1.jpg">
+<h3>Sunil Das – Bamboo Crafts</h3>
+<p>Sunil creates eco-friendly baskets and furniture using bamboo.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t3.ftcdn.net/jpg/04/46/09/66/240_F_446096607_VxJubkMCkcUf9Q9jfTUiRER0ES09ab5G.jpg">
+<h3>Pooja Singh – Jewelry</h3>
+<p>Pooja designs handmade jewelry inspired by Indian culture.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t4.ftcdn.net/jpg/19/13/90/71/240_F_1913907118_I4WL5ZLnVjfz46NtjL8bmXNT9f4oae03.jpg">
+<h3>Karan Verma – Leather Crafts</h3>
+<p>Karan revived his family leather workshop and now sells premium handcrafted bags.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t3.ftcdn.net/jpg/01/87/02/34/240_F_187023414_04IphGPenPtCpAU3R9cHB5XO7lgydL4U.jpg">
+<h3>Shanti Devi – Hand Painting</h3>
+<p>Shanti paints traditional folk art that tells stories of village life.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t4.ftcdn.net/jpg/15/46/29/05/240_F_1546290552_qKqrmGIFitAj6QpTHVHtG66AxhddYow4.jpg">
+<h3>Amit Gupta – Terracotta</h3>
+<p>Amit's terracotta sculptures blend tradition with modern design.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t3.ftcdn.net/jpg/19/17/31/98/240_F_1917319826_MP2yeSmM4pLt123JghAicHChbRjaUcsX.jpg">
+<h3>Neha Kapoor – Textile Art</h3>
+<p>Neha creates vibrant handmade fabrics inspired by Indian festivals.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t3.ftcdn.net/jpg/17/40/51/08/240_F_1740510897_DMcJs4T7m9xshmvjogtD6FzXd7ZWFJqW.jpg">
+<h3>Ravi Mishra – Stone Carving</h3>
+<p>Ravi learned stone carving from temple artisans and now sells decorative sculptures.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t4.ftcdn.net/jpg/17/64/86/55/240_F_1764865532_sVE3TFNQvoPR0azw1NZyuTG40Sr4TBdP.jpg">
+<h3>Farida Khan – Carpet Weaving</h3>
+<p>Farida's handmade carpets bring centuries-old patterns to modern homes.</p>
+</div>
+
+<div class="story-card">
+<img src="https://t3.ftcdn.net/jpg/19/19/63/44/240_F_1919634475_A1AX0FZZ1ppT6Lfe57r4ADxNUptlJwwF.jpg">
+<h3>Deepak Joshi – Wooden Toys</h3>
+<p>Deepak crafts eco-friendly wooden toys loved by children and collectors.</p>
+</div>
+
+</div>
+
+</section>
+<section id="ai-tools">
+
+<h2 style="color: #555;"class="section-title">AI Tools for Artisans</h2>
+<p style="color: #555;font-size:large;" class="ai-subtitle">
+Empowering artisans with AI-powered marketing and storytelling tools
+</p>
+
+<div class="ai-grid">
+
+<div class="ai-card ai-story-card">
+<h3>AI Story Generator</h3>
+
+<input id="artisanName" placeholder="Artisan Name">
+<input id="artisanCraft" placeholder="Craft">
+<input id="artisanVillage" placeholder="Village">
+<input id="artisanYears" placeholder="Years of Experience">
+
+<button onclick="generateStory()">Generate Story</button>
+
+<div id="storyResult"></div>
+</div>
+
+
+<div class="ai-card ai-social-card">
+<h3>AI Social Media Post Generator</h3>
+
+<input id="productName" placeholder="Product Name">
+
+<button onclick="generatePost()">Generate Caption</button>
+
+<div id="postResult"></div>
+</div>
+
+<div class="ai-card ai-price-card">
+<h3>AI Price Suggestion</h3>
+
+<input id="hours" placeholder="Hours to Make">
+
+<button onclick="suggestPrice()">Suggest Price</button>
+
+<div id="priceResult"></div>
+
+</div>
+
+</div>
+
+
+</section>
+    <section id="upload" class="upload-section">
+        <div class="upload-container">
+            <h2 style="color: #555;";  class="section-title">Upload Your Craft</h2>
+            <p style="margin-bottom: 2rem ;color: #555;">Upload your product photo and watch AI create marketing magic instantly!</p>
+            
+            <label for="craft-upload" class="file-input-label">
+                <i class="fas fa-cloud-upload-alt"></i> Choose Craft Photo
+            </label>
+            <input type="file" id="craft-upload" accept="image/*">
+            
+            <button class="btn-primary" style="padding: 1.2rem 3rem; font-size: 1.2rem;" onclick="generateAIContent()">
+                <i class="fas fa-sparkles"></i> Generate AI Content
+            </button>
+            
+            <div id="ai-result" class="ai-result">
+                <h4>✨ Your AI-Generated Content:</h4>
+                <div id="generated-content"></div>
+                <button class="btn-secondary" onclick="copyToClipboard()" style="margin-top: 1rem;">Copy to Clipboard</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CraftConnect AI</h3>
+                <p>Empowering 5,000+ Indian artisans to reach global markets through AI-powered tools.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#upload">Upload Craft</a>
+                <a href="#ai-tools">AI Tools</a>
+                <a href="#artisans">Artisans</a>
+                <a href="#marketplace">Marketplace</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <a href="#">support@craftconnect.ai</a>
+                <a href="#">+91 98765 43210</a>
+                <a href="#">Ghaziabad, UP</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CraftConnect AI | Empowering Traditional Artisans Worldwide</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="data:image/jpeg;base64,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" style="width:100%; border-radius:15px; margin-bottom:1rem;">
+            <h3>Rajasthan Blue Pottery</h3>
+            <p>Handcrafted using the ancient Persian technique introduced 500 years ago. Each piece is made from quartz stone powder, not clay!</p>
+            <p><strong>Price:</strong> ₹1,200 - ₹15,000</p>
+            <button class="btn-primary" style="width:100%; margin-top:1rem;">Contact Artisan</button>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2" style="width:100%; border-radius:15px; margin-bottom:1rem;">
+            <h3>Kashmiri Pashmina Shawl</h3>
+            <p>Made from the rare undercoat of Himalayan goats. So fine, 4 shawls can pass through a ring!</p>
+            <p><strong>Price:</strong> ₹8,500 - ₹45,000</p>
+            <button class="btn-primary" style="width:100%; margin-top:1rem;">Contact Artisan</button>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="https://khirki.in/cdn/shop/files/Artboard3_05368a32-ee51-44dc-9b0e-0a98b21a0333.jpg?v=1730457108" style="width:100%; border-radius:15px; margin-bottom:1rem;">
+            <h3>Madhubani Painting</h3>
+            <p>Bihar's ancient folk art using natural colors from plants, cow dung, and rice powder.</p>
+            <p><strong>Price:</strong> ₹2,800 - ₹25,000</p>
+            <button class="btn-primary" style="width:100%; margin-top:1rem;">Contact Artisan</button>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+                nav.classList.remove('active');
+            });
+        });
+
+        
+
+         
+
+        // Counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / 100;
+                
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(animateCounters, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    if (entry.target.classList.contains('stats')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Modal functionality
+        document.querySelectorAll('[data-modal]').forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.getAttribute('data-modal');
+                document.getElementById(modalId).style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.close').forEach(close => {
+            close.addEventListener('click', () => {
+                close.closest('.modal').style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // AI Content Generation (Demo)
+        function generateAIContent() {
+            const fileInput = document.getElementById('craft-upload');
+            if (!fileInput.files.length) {
+                alert('Please select a craft photo first!');
+                return;
+            }
+
+            const crafts = [
+                "Handcrafted Rajasthan Blue Pottery - Made from quartz powder using 500-year-old Persian techniques. Each piece tells a story of tradition and artistry.",
+                "Authentic Kashmiri Pashmina Shawl - So delicate, it passes through a ring! Woven from rare Himalayan goat undercoat with intricate embroidery.",
+                "Vibrant Madhubani Painting - Bihar's ancient folk art using natural plant colors. Every stroke carries centuries of cultural wisdom."
+            ];
+
+            const randomContent = crafts[Math.floor(Math.random() * crafts.length)];
+            
+            document.getElementById('generated-content').innerHTML = `
+                <h5>📝 Product Description:</h5>
+                <p>"${randomContent}"</p>
+                <h5>📱 Instagram Caption:</h5>
+                <p>"Preserving tradition, one craft at a time ✨ #IndianHandmade #ArtisanCraft #CraftConnectAI"</p>
+            `;
+            
+            document.getElementById('ai-result').style.display = 'block';
+            document.querySelector('.upload-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyToClipboard() {
+            const content = document.getElementById('generated-content').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('✅ Content copied to clipboard!');
+            });
+        }
+    </script>
+    
+<div id="cart-panel">
+
+<h2>Your Cart</h2>
+
+<div id="cart-items"></div>
+
+<div class="cart-total">
+Total: ₹<span id="total-price">0</span>
+</div>
+
+<button class="pay-btn" onclick="checkout()">Proceed to Payment</button>
+
+</div>
+
+
+<script>
+let cart = [];
+
+function toggleCart() {
+    document.getElementById('cart-panel').style.right = document.getElementById('cart-panel').style.right === '0px' ? '-350px' : '0px';
+}
+
+function addToCart(btn, name, price) {
+    // Convert price to number
+    price = parseInt(price);
+    let qty = parseInt(btn.closest('.card').querySelector('.count').innerText || 1);
+    
+    // Check if already in cart
+    let found = cart.find(item => item.name === name);
+    if (found) {
+        found.qty += qty;
+    } else {
+        cart.push({name: name, price: price, qty: qty});
+    }
+    
+    showCart();
+    btn.innerHTML = 'Added ✓';
+    setTimeout(() => btn.innerHTML = 'Add to Cart', 1000);
+}
+function increase(btn){
+
+let countEl = btn.parentElement.querySelector(".count");
+let count = parseInt(countEl.innerText);
+
+count++;
+
+countEl.innerText = count;
+
+}
+
+function decrease(btn){
+
+let countEl = btn.parentElement.querySelector(".count");
+let count = parseInt(countEl.innerText);
+
+if(count > 1){
+count--;
+}
+
+countEl.innerText = count;
+
+}
+
+
+function showCart() {
+    let items = document.getElementById('cart-items');
+    let totalEl = document.getElementById('total-price');
+    let countEl = document.getElementById('cart-count');
+
+    let total = 0;
+    let html = '';
+    let count = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        let item = cart[i];
+        let itemTotal = item.price * item.qty;
+
+        total += itemTotal;
+        count += item.qty;
+
+        html += `
+        <div class="cart-item">
+            <div>
+                <div><b>${item.name}</b></div>
+                <div>₹${item.price} × ${item.qty}</div>
+            </div>
+
+            <div class="cart-counter">
+                <button onclick="changeQty(${i},-1)">−</button>
+                <button onclick="changeQty(${i},1)">+</button>
+            </div>
+        </div>
+        `;
+    }
+
+    items.innerHTML = html;
+    totalEl.innerText = total;
+    countEl.innerText = count;
+}
+function changeQty(index, change) {
+
+    cart[index].qty += change;
+
+    if(cart[index].qty <= 0){
+        cart.splice(index,1);
+    }
+
+    showCart();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    showCart();
+});
+function checkout(){
+    if(cart.length === 0){
+        alert("Cart is empty!");
+        return;
+    }
+
+    let user = localStorage.getItem("user");
+
+    if(!user){
+        alert("Please login first to save your order history.");
+        return;
+    }
+
+    let userData = JSON.parse(user);
+
+    if(!userData.orders){
+        userData.orders = [];
+    }
+
+    cart.forEach(item => {
+        userData.orders.push(`${item.name} - ₹${item.price} × ${item.qty}`);
+    });
+
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    alert("Payment Successful! 🎉");
+
+    cart = [];
+    showCart();
+}
+function generateStory(){
+
+let name = document.getElementById("artisanName").value
+let craft = document.getElementById("artisanCraft").value
+let village = document.getElementById("artisanVillage").value
+let years = document.getElementById("artisanYears").value
+
+let story = `${name} is a skilled ${craft} artisan from ${village}. 
+With over ${years} years of experience, they preserve traditional Indian craftsmanship through every handmade creation.`
+
+let result = document.getElementById("storyResult")
+
+result.style.display = "block"
+result.innerText = story
+
+}
+
+
+function generatePost(){
+
+let product = document.getElementById("productName").value
+
+let post = `✨ Discover our handmade ${product} crafted by skilled Indian artisans.
+
+Support traditional craftsmanship and sustainable art.
+
+#HandmadeIndia #SupportArtisans #IndianCraft`
+
+let result = document.getElementById("postResult")
+
+result.style.display = "block"
+result.innerText = post
+
+}
+
+
+
+function suggestPrice(){
+
+let hours = document.getElementById("hours").value
+
+let price = hours * 500
+
+let result = document.getElementById("priceResult")
+
+result.style.display = "block"
+result.innerText = "Suggested Price: ₹" + price + " – ₹" + (price + 500)
+
+}
+const tradeContacts = [
+  {
+    id: "ravi",
+    name: "Ravi Textiles Mill",
+    item: "Cotton Fabric Rolls",
+    location: "Meerut Road, Ghaziabad",
+    city: "Ghaziabad",
+    avatar: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=300&auto=format&fit=crop",
+    map: "https://www.google.com/maps?q=28.6692,77.4538&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Haan ji bhai, cotton fabric available hai. Aap kitna lena chahoge?",
+      "Namaste bhaiya, hum mill se direct supply karte hain. Quantity bata do.",
+      "Hello ji, fabric chahiye tha kya? Rate quantity pe depend karega."
+    ],
+    priceReplies: [
+      "Agar 100 meter se upar loge to rate aur better de denge.",
+      "Chhota order bhi ho jayega, but bulk me price kaafi kam ho jata hai.",
+      "Bhai repeat order ho to aur accha rate nikal jayega."
+    ],
+    quantityReplies: [
+      "Aap exact meter bata do, us hisaab se final quote bhej deta hoon.",
+      "50 meter, 100 meter, 200 meter sab possible hai.",
+      "Trial ke liye chhota lot bhi de sakte hain."
+    ],
+    meetReplies: [
+      "Meerut Road side pickup ho jayega, ya beech ka point decide kar lete hain.",
+      "Aap Ghaziabad me ho to meeting arrange kar sakte hain.",
+      "Factory side milna ho to pehle ek time decide kar lete hain."
+    ],
+    qualityReplies: [
+      "Bedsheet use ke liye soft aur durable dono quality hai.",
+      "Sample dekhna ho to possible hai bhai.",
+      "Material ka finish accha hai, local market se better padega."
+    ],
+    generalReplies: [
+      "Theek hai bhai, aap requirement clear bata do, mai accordingly suggest kar deta hoon.",
+      "Haan ji possible hai, bas quantity aur location confirm kar do.",
+      "Samajh gaya, aap small scale pe kaam kar rahe ho to us hisaab se quote bana denge."
+    ]
+  },
+  {
+    id: "noida-yarn",
+    name: "Noida Yarn Hub",
+    item: "Cotton Yarn",
+    location: "Sector 63, Noida",
+    city: "Noida",
+    avatar: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=300&auto=format&fit=crop",
+   map: "https://www.google.com/maps?q=28.6289,77.3803&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Hello bhai, yarn chahiye to count bata do, uske hisaab se bolenge.",
+      "Noida se direct supply kar denge, aapko kis type ka cotton yarn chahiye?",
+      "Haan ji, weaving ya stitching ke liye yarn chahiye?"
+    ],
+    priceReplies: [
+      "Count pe depend karega bhai, normal range 175-190 ke around padegi.",
+      "Agar regular loge to rate aur adjust kar lenge.",
+      "Bulk wale customers ko hum direct discount de dete hain."
+    ],
+    quantityReplies: [
+      "Kitne kg chahiye? 20-25 kg se start ho jayega.",
+      "Trial ke liye kam quantity bhi de denge.",
+      "Stock available hai, bas exact requirement batao."
+    ],
+    meetReplies: [
+      "Sector 63 side aa sakte ho to mil lete hain.",
+      "Noida me public point pe bhi mil sakte hain.",
+      "Pickup ya delivery dono discuss ho sakta hai."
+    ],
+    qualityReplies: [
+      "Yarn ka quality consistent hai, handloom walon ko bhi supply jata hai.",
+      "Aap sample reel mangwa sakte ho.",
+      "Soft finish chahiye ya stronger count?"
+    ],
+    generalReplies: [
+      "Bolo bhai kaam kis type ka hai, us hisaab se suggest karunga.",
+      "Aapka use case samajh ke better option bata denge.",
+      "Koi tension nahi, chhota business ho to bhi deal ho jayegi."
+    ]
+  },
+  {
+    id: "sharma-dye",
+    name: "Sharma Dye Works",
+    item: "Natural Fabric Dyes",
+    location: "Sahibabad, Ghaziabad",
+    city: "Ghaziabad",
+    avatar: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=300&auto=format&fit=crop",
+    map: "https://www.google.com/maps?q=28.6801,77.3290&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Namaste ji, natural dyes chahiye to shade bata dijiye.",
+      "Printing ke liye chahiye ya fabric colouring ke liye?",
+      "Haan ji bhai, eco-friendly dyes available hain."
+    ],
+    priceReplies: [
+      "Shade aur quantity pe rate vary karega.",
+      "Bulk me colour wise accha rate de denge.",
+      "Aap kaam regular karte ho to long term me aur sasta padega."
+    ],
+    quantityReplies: [
+      "5 litre se lekar bulk tak available hai.",
+      "Aap trial lot le lo pehle, fir regular kar lena.",
+      "Jo quantity chahiye uska arrangement ho jayega."
+    ],
+    meetReplies: [
+      "Sahibabad industrial side milna easy rahega.",
+      "Aap chahe to Ghaziabad border pe bhi mil sakte hain.",
+      "Meeting point aapke hisaab se adjust kar lenge."
+    ],
+    qualityReplies: [
+      "Colour fastness acchi hai bhai.",
+      "Kapde pe achha finish aata hai.",
+      "Sample shade card bhej sakte hain."
+    ],
+    generalReplies: [
+      "Aap shade batao, mai available options check karke bolta hoon.",
+      "Handmade products ke liye ye kaafi demand me rehta hai.",
+      "Jo bhi requirement hai clearly bata do, best option nikalte hain."
+    ]
+  },
+  {
+    id: "delhi-packaging",
+    name: "Delhi Packaging House",
+    item: "Eco Packaging Boxes",
+    location: "Sadar Bazaar, Delhi",
+    city: "Delhi",
+    avatar: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=300&auto=format&fit=crop",
+    map: "https://www.google.com/maps?q=28.6473,77.2167&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Packaging chahiye bhai? Handmade products ke liye boxes ready hain.",
+      "Custom size bhi kar denge agar quantity theek ho.",
+      "Hello ji, artisan packaging ke liye kaafi options hain."
+    ],
+    priceReplies: [
+      "Normal box ka rate kam hai, custom print alag padega.",
+      "500+ quantity pe accha rate mil jayega.",
+      "Aap sample size bata do, fir exact costing de dunga."
+    ],
+    quantityReplies: [
+      "100 se start kar lo, bulk me aur sasta padega.",
+      "500 boxes tak immediate nikal jayenge.",
+      "Quantity ke hisaab se lead time bata denge."
+    ],
+    meetReplies: [
+      "Sadar Bazaar side milna easiest rahega.",
+      "Delhi me central pickup point bhi decide kar sakte hain.",
+      "Aap metro accessible point chaho to woh bhi dekh lenge."
+    ],
+    qualityReplies: [
+      "Packaging sturdy hai bhai, gifting ke liye bhi theek hai.",
+      "Eco-friendly aur decent finish dono mil jayega.",
+      "Aap sample box dekh ke decide kar sakte ho."
+    ],
+    generalReplies: [
+      "Product type bata do, us hisaab se packaging suggest karenge.",
+      "Handmade item hai to premium look wala option bhi hai.",
+      "Aapko plain chahiye ya printed?"
+    ]
+  },
+  {
+    id: "faridabad-cotton",
+    name: "Faridabad Cotton Supply",
+    item: "Bedsheet Cotton Cloth",
+    location: "Faridabad Industrial Area",
+    city: "Faridabad",
+    avatar: "https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=300&auto=format&fit=crop",
+   map: "https://www.google.com/maps?q=28.4089,77.3178&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1603252109303-2751441dd157?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Bedsheet fabric chahiye? Humare paas accha cotton cloth hai.",
+      "Bhai agar aap bedsheet banate ho to direct mill type rate de sakte hain.",
+      "Hello ji, plain cotton aur printed dono line mil jayegi."
+    ],
+    priceReplies: [
+      "Bedsheet wala cloth 68 ke around start ho jayega quantity pe.",
+      "Regular uthao to aur kam padega.",
+      "Aap meter batao fir best rate bolta hoon."
+    ],
+    quantityReplies: [
+      "100-120 meter easily de denge.",
+      "Chhota startup ho to bhi koi dikkat nahi.",
+      "Aap lot-wise le sakte ho."
+    ],
+    meetReplies: [
+      "Faridabad industrial side aa sakte ho to easy rahega.",
+      "Aapko NCR me midpoint chahiye ho to woh bhi discuss kar lete hain.",
+      "Pickup point fix kar lenge bhai."
+    ],
+    qualityReplies: [
+      "Bedsheet quality me soft touch aur decent thickness dono milega.",
+      "Sample dekh ke hi final karo, wo better rahega.",
+      "Local bazaar se better finish padega."
+    ],
+    generalReplies: [
+      "Aap kis range ki bedsheet bana rahe ho us hisaab se bataunga.",
+      "Budget aur quality balance karna hai to options hain.",
+      "Fatafat kaam ho jayega, bas exact need clear kar do."
+    ]
+  },
+  {
+    id: "gurugram-thread",
+    name: "Gurugram Thread Co.",
+    item: "Stitching Thread",
+    location: "Udyog Vihar, Gurugram",
+    city: "Gurugram",
+    avatar: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?q=80&w=300&auto=format&fit=crop",
+   map: "https://www.google.com/maps?q=28.4595,77.0266&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Thread chahiye bhai? Kaunsa shade aur thickness?",
+      "Stitching thread ka regular supply chahiye to batao.",
+      "Hello ji, industrial aur small-batch dono type ka stock hai."
+    ],
+    priceReplies: [
+      "Bundle count pe depend karega.",
+      "Bulk loge to cost kaafi kam ho jayegi.",
+      "Aap colour range batao, exact rate fir bolenge."
+    ],
+    quantityReplies: [
+      "80 bundle tak immediate ho jayega.",
+      "Chhota lot bhi possible hai.",
+      "Regular buyers ko priority stock milta hai."
+    ],
+    meetReplies: [
+      "Udyog Vihar side milna easiest rahega.",
+      "Gurugram border side bhi mil sakte hain.",
+      "Aap convenient area bata do."
+    ],
+    qualityReplies: [
+      "Thread strong hai, stitching me breakage kam rehta hai.",
+      "Aapko premium chahiye ya economy?",
+      "Sample spool bhej sakte hain."
+    ],
+    generalReplies: [
+      "Kaunsa product stitch karte ho us hisaab se suggest karenge.",
+      "Shade card chahiye ho to woh bhi possible hai.",
+      "Koi issue nahi bhai, requirement batao."
+    ]
+  },
+  {
+    id: "loni-cloth",
+    name: "Loni Cloth Traders",
+    item: "Printed Cotton Cloth",
+    location: "Loni, Ghaziabad",
+    city: "Loni",
+    avatar: "https://images.unsplash.com/photo-1503342394128-c104d54dba01?q=80&w=300&auto=format&fit=crop",
+   map: "https://www.google.com/maps?q=28.7515,77.2900&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1503342394128-c104d54dba01?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Printed cloth dekhna hai kya bhai?",
+      "Aap home linen banate ho to ye patterns kaafi chalenge.",
+      "Hello ji, printed cotton ready stock me hai."
+    ],
+    priceReplies: [
+      "Design wise rate thoda upar neeche hota hai.",
+      "Simple print alag, premium print alag padega.",
+      "Bulk me kaafi manageable rate ho jayega."
+    ],
+    quantityReplies: [
+      "Kitna meter chahiye batao, stock check kar deta hoon.",
+      "Trial order bhi le sakte ho.",
+      "Multiple designs mix karke bhi de denge."
+    ],
+    meetReplies: [
+      "Loni side aa jao to dekh bhi loge aur deal bhi ho jayegi.",
+      "Aap Ghaziabad ke ho to midpoint easy rahega.",
+      "Meeting point flexible hai."
+    ],
+    qualityReplies: [
+      "Print sharp hai aur fabric soft hai.",
+      "Wash ke baad bhi kaafi decent rehta hai.",
+      "Aap sample piece dekh lo pehle."
+    ],
+    generalReplies: [
+      "Aapko floral chahiye ya simple pattern?",
+      "Bedsheet ke liye kaafi acha option hai.",
+      "Bhai photo bhi bhej sakte hain."
+    ]
+  },
+  {
+    id: "meerut-loom",
+    name: "Meerut Loom House",
+    item: "Linen Blend Fabric",
+    location: "Meerut City",
+    city: "Meerut",
+    avatar: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=300&auto=format&fit=crop",
+    map: "https://www.google.com/maps?q=28.9845,77.7064&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Linen blend dekhna hai kya? Premium look deta hai.",
+      "Hello ji, thoda premium segment ka fabric hai.",
+      "Agar aap upscale handmade products bana rahe ho to ye accha rahega."
+    ],
+    priceReplies: [
+      "Ye cotton se thoda premium padega bhai.",
+      "Quantity ke hisaab se rate adjust kar denge.",
+      "Aap exact use batao fir suggest karenge worth hai ya nahi."
+    ],
+    quantityReplies: [
+      "Small lots me bhi mil jayega.",
+      "Aap trial kar sakte ho pehle.",
+      "Bade order ka arrangement alag se ho jayega."
+    ],
+    meetReplies: [
+      "Meerut city side milna padega bhai.",
+      "Agar aap NCR se ho to ek day plan karke aa sakte ho.",
+      "Courier sample bhi possible ho sakta hai."
+    ],
+    qualityReplies: [
+      "Look classy aata hai isme.",
+      "Texture accha hai, premium bedsheet ya décor line ke liye use hota hai.",
+      "Aapko sample photo bhej deta hoon."
+    ],
+    generalReplies: [
+      "Budget segment ya premium segment, woh bata do.",
+      "Aapka market kaunsa hai us hisaab se bolenge.",
+      "Ye product sabke liye nahi hota, but accha margin de sakta hai."
+    ]
+  },
+  {
+    id: "karol-bagh",
+    name: "Karol Bagh Accessories",
+    item: "Bedsheet Lace & Borders",
+    location: "Karol Bagh, Delhi",
+    city: "Delhi",
+    avatar: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=300&auto=format&fit=crop",
+    map: "https://www.google.com/maps?q=28.6519,77.1909&z=14&output=embed",
+    productImage: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop",
+    opener: [
+      "Borders aur lace chahiye ho to options hain bhai.",
+      "Bedsheet finishing ke liye kaafi achha material mil jayega.",
+      "Aap simple chahte ho ya decorative?"
+    ],
+    priceReplies: [
+      "Design ke hisaab se rate change hota hai.",
+      "Bulk me sasta padega obviously.",
+      "Sample design select kar lo fir final price bolte hain."
+    ],
+    quantityReplies: [
+      "Rolls me de denge, koi issue nahi.",
+      "Aap mix designs bhi le sakte ho.",
+      "Chhota order bhi manage ho jayega."
+    ],
+    meetReplies: [
+      "Karol Bagh side aa sakte ho to best rahega.",
+      "Central Delhi me meet karna easy hai.",
+      "Aapko metro ke paas point chahiye ho to batana."
+    ],
+    qualityReplies: [
+      "Finishing ka look kaafi improve ho jata hai.",
+      "Photos me aur accha dikhega product.",
+      "Quality decent hai, cheap wali category nahi hai."
+    ],
+    generalReplies: [
+      "Aap jo bana rahe ho uski photo ho to aur better suggest karenge.",
+      "Presentation improve karne ke liye ye accha add-on hai.",
+      "Ek do options dekh lo pehle."
+    ]
+  }
+];
+
+let currentTradeContact = tradeContacts[0];
+
+function getCurrentTime(){
+    const now = new Date();
+    let h = now.getHours();
+    let m = now.getMinutes().toString().padStart(2, "0");
+    let ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    return `${h}:${m} ${ampm}`;
+}
+
+function renderTradeContacts(){
+    const list = document.getElementById("tradeContactList");
+    if(!list) return;
+
+    list.innerHTML = tradeContacts.map((contact, index) => `
+        <div class="trade-contact ${index === 0 ? "active-contact" : ""}"
+            onclick="openTradeContactById('${contact.id}', this)">
+            <img src="${contact.avatar}" alt="${contact.name}">
+            <div>
+    <div class="trade-contact-top">
+        <h4>${contact.name}</h4>
+        <span class="status-dot online-dot"></span>
+    </div>
+    <p>${contact.item}</p>
+    <span>${contact.location}</span>
+    <div class="verified-badge">✔ Verified Supplier</div>
+</div>
+        </div>
+    `).join("");
+}
+
+function openTradeContactById(id, el){
+    const contact = tradeContacts.find(c => c.id === id);
+    if(!contact) return;
+
+    currentTradeContact = contact;
+
+    document.querySelectorAll(".trade-contact").forEach(c => c.classList.remove("active-contact"));
+    if(el) el.classList.add("active-contact");
+
+    document.getElementById("tradeChatName").innerText = contact.name;
+    document.getElementById("tradeChatMeta").innerText = `${contact.item} • ${contact.location}`;
+    document.getElementById("tradeChatAvatar").src = contact.avatar;
+    document.getElementById("tradeMiniMap").src = contact.map;
+
+    const opener = contact.opener[Math.floor(Math.random() * contact.opener.length)];
+
+    document.getElementById("tradeChatMessages").innerHTML = `
+        <div class="chat-msg other">${opener}<span class="chat-time">${getCurrentTime()}</span></div>
+        <div class="chat-msg other">Aapko ${contact.item} chahiye ho to quantity aur budget bata do.<span class="chat-time">${getCurrentTime()}</span></div>
+    `;
+}
+function fakeTyping(callback){
+    const chatBox = document.getElementById("tradeChatMessages");
+
+    const typing = document.createElement("div");
+    typing.className = "typing";
+    typing.id = "typingIndicator";
+    typing.innerText = "typing...";
+    chatBox.appendChild(typing);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    setTimeout(() => {
+        typing.remove();
+        callback();
+    }, 1200);
+}
+
+function sendTradeMessage(){
+    const input = document.getElementById("tradeMessageInput");
+    const chatBox = document.getElementById("tradeChatMessages");
+    const message = input.value.trim();
+
+    if(message === "") return;
+
+    const myMsg = document.createElement("div");
+    myMsg.className = "chat-msg me";
+    myMsg.innerHTML = `${message}<span class="chat-time">${getCurrentTime()}</span>`;
+    chatBox.appendChild(myMsg);
+
+    input.value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    const typing = document.createElement("div");
+    typing.className = "typing-msg";
+    typing.id = "typingIndicator";
+    typing.innerText = "typing...";
+    chatBox.appendChild(typing);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    setTimeout(() => {
+        const oldTyping = document.getElementById("typingIndicator");
+        if(oldTyping) oldTyping.remove();
+
+        fakeTyping(() => {
+    const replyBlock = buildHumanReply(message, currentTradeContact);
+    chatBox.appendChild(replyBlock);
+    chatBox.scrollTop = chatBox.scrollHeight;
+});
+    }, 900);
+}
+function getNegotiationReply(msg, contact){
+    const text = msg.toLowerCase();
+    
+    if(
+        text.includes("price") ||
+        text.includes("rate") ||
+        text.includes("kam") ||
+        text.includes("discount") ||
+        text.includes("sasta") ||
+        text.includes("best price") ||
+        text.includes("final") ||
+        text.includes("negotiable") ||
+        text.includes("thoda kam") ||
+        text.includes("lowest")
+    ){
+        const replies = [
+            "Bhai quantity achhi hui to rate aur better kar dunga.",
+            "Aap bulk loge to price me definitely adjustment ho jayega.",
+            "Middle market se kam hi dunga, aap qty batao.",
+            "Final rate quantity aur pickup point ke hisaab se nikal dunga.",
+            "Thoda bahut kam ho jayega bhai, order size bata do.",
+            "Regular kaam raha to aur achha rate de denge.",
+            "Agar sample ke baad bulk loge to better deal pakka milegi.",
+            "Transport alag hua to uske hisaab se final costing bata dunga."
+        ];
+
+        return replies[Math.floor(Math.random() * replies.length)];
+    }
+       if(
+    text.includes("bulk") ||
+    text.includes("wholesale") ||
+    text.includes("100 meter") ||
+    text.includes("200 meter") ||
+    text.includes("500") ||
+    text.includes("1000")
+){
+    const bulkReplies = [
+        "Bulk order pe special rate nikal jayega.",
+        "Wholesale quantity pe market se better quotation de dunga.",
+        "Aap bulk me loge to direct factory pricing possible hai.",
+        "100+ quantity pe alag slab lag jayega bhai.",
+        "Regular bulk supply ke liye long-term rate fix kar sakte hain."
+    ];
+
+    return bulkReplies[Math.floor(Math.random() * bulkReplies.length)];
+}
+    return null;
+}
+function buildHumanReply(message, contact){
+    const msg = message.toLowerCase();
+   if(
+    msg.includes("price") ||
+    msg.includes("rate") ||
+    msg.includes("discount") ||
+    msg.includes("kam") ||
+    msg.includes("sasta") ||
+    msg.includes("best price") ||
+    msg.includes("final")
+){
+    const wrapper = document.createElement("div");
+wrapper.className = "chat-msg other";
+
+wrapper.innerHTML = `${randomFrom([
+    "Bhai thoda margin hai, qty batao better rate de dunga.",
+    "Discount ho jayega, kitni quantity loge?",
+    "Bulk me loge to best rate nikal dunga.",
+    "Market se kam hi dunga, aap confirm karo quantity.",
+    "Regular kaam raha to aur kam rate de denge."
+])}<span class="chat-time">${getCurrentTime()}</span>`;
+
+return wrapper;
+}  
+
+    const negotiationReply = getNegotiationReply(msg, contact);
+if(negotiationReply){
+    const wrapper = document.createElement("div");
+    wrapper.className = "chat-msg other";
+    wrapper.innerHTML = `${negotiationReply}<span class="chat-time">${getCurrentTime()}</span>`;
+    return wrapper;
+}
+    const wrapper = document.createElement("div");
+
+    if(
+        msg.includes("image") ||
+        msg.includes("images") ||
+        msg.includes("photo") ||
+        msg.includes("photos") ||
+        msg.includes("pic") ||
+        msg.includes("pics") ||
+        msg.includes("catalog") ||
+        msg.includes("sample bhejo") ||
+        msg.includes("dikhao")
+    ){
+        wrapper.className = "trade-image-msg";
+        wrapper.innerHTML = `
+            <img src="${contact.productImage}" alt="${contact.item}">
+            <p>Haan bhai, ye ek reference image dekh lo for ${contact.item}. Aur chahiye ho to aur bhej deta hoon.<span class="chat-time">${getCurrentTime()}</span></p>
+        `;
+        return wrapper;
+    }
+
+    let replyText = "";
+
+    if(msg.includes("price") || msg.includes("rate") || msg.includes("cost") || msg.includes("kitne ka")){
+        replyText = randomFrom(contact.priceReplies);
+    } else if(msg.includes("quantity") || msg.includes("meter") || msg.includes("kg") || msg.includes("bundle") || msg.includes("roll")){
+        replyText = randomFrom(contact.quantityReplies);
+    } else if(msg.includes("meet") || msg.includes("location") || msg.includes("map") || msg.includes("pickup") || msg.includes("kaha")){
+        replyText = randomFrom(contact.meetReplies);
+    } else if(msg.includes("quality") || msg.includes("sample") || msg.includes("finish") || msg.includes("soft") || msg.includes("durable")){
+        replyText = randomFrom(contact.qualityReplies);
+    } else {
+        replyText = randomFrom(contact.generalReplies);
+    }
+
+    wrapper.className = "chat-msg other";
+    wrapper.innerHTML = `${replyText}<span class="chat-time">${getCurrentTime()}</span>`;
+    return wrapper;
+}
+
+function randomFrom(arr){
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    renderTradeContacts();
+    openTradeContactById(tradeContacts[0].id, document.querySelector(".trade-contact"));
+});
+
+function openLogin(){
+    document.getElementById("loginModal").style.display = "block";
+}
+
+function closeLogin(){
+    document.getElementById("loginModal").style.display = "none";
+}
+
+function loginUser(){
+    let name = document.getElementById("username").value.trim();
+    let email = document.getElementById("useremail").value.trim();
+    let password = document.getElementById("userpassword").value.trim();
+
+    if(name === "" || email === "" || password === ""){
+        alert("Please fill all details");
+        return;
+    }
+
+    const userData = {
+        name: name,
+        email: email,
+        password: password,
+       orders: [],
+        savedItems: [
+            "Banarasi Silk Saree",
+            "Handmade Jewelry"
+        ]
+    };
+
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    document.getElementById("loginModal").style.display = "none";
+
+    alert("Welcome " + name + " 🎉");
+
+    showUser();
+}
+
+function showUser(){
+    let user = localStorage.getItem("user");
+
+    const loginBtn = document.getElementById("loginBtn");
+    const navProfile = document.getElementById("navProfile");
+
+    if(user){
+        let userData = JSON.parse(user);
+
+        loginBtn.style.display = "none";
+        navProfile.style.display = "block";
+
+        document.getElementById("navAvatar").innerText = userData.name.charAt(0).toUpperCase();
+        document.getElementById("profileBigAvatar").innerText = userData.name.charAt(0).toUpperCase();
+        document.getElementById("profileName").innerText = userData.name;
+        document.getElementById("profileEmail").innerText = userData.email;
+    }else{
+        loginBtn.style.display = "inline-block";
+        navProfile.style.display = "none";
+    }
+}
+function toggleProfileDropdown(){
+    document.getElementById("profileDropdownPanel").classList.toggle("show");
+}
+
+function openSettings(){
+    alert("Settings panel coming soon.");
+}
+
+function openOrders(){
+    let user = localStorage.getItem("user");
+
+    if(!user){
+        alert("Please login first");
+        return;
+    }
+
+    let userData = JSON.parse(user);
+    let orders = userData.orders || [];
+    let ordersList = document.getElementById("ordersList");
+
+    if(orders.length === 0){
+        ordersList.innerHTML = `
+            <div class="empty-orders">
+                No previous orders found yet.
+            </div>
+        `;
+    }else{
+        ordersList.innerHTML = orders.map(order => {
+            let parts = order.split(" - ");
+            let title = parts[0] || "Order Item";
+            let price = parts[1] || "";
+            return `
+                <div class="order-item">
+                    <div class="order-item-left">
+                        <div class="order-item-title">${title}</div>
+                        <div class="order-item-sub">Successfully purchased</div>
+                    </div>
+                    <div class="order-item-price">${price}</div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    document.getElementById("ordersModal").style.display = "block";
+}
+function closeOrdersModal(){
+    document.getElementById("ordersModal").style.display = "none";
+}
+function openSavedItems(){
+    let user = localStorage.getItem("user");
+
+    if(!user){
+        alert("Please login first");
+        return;
+    }
+
+    let userData = JSON.parse(user);
+    let savedItems = userData.savedItems || [];
+
+    if(savedItems.length === 0){
+        alert("No saved items found.");
+        return;
+    }
+
+    alert("Saved Items:\n\n" + savedItems.join("\n"));
+}
+
+function openHelp(){
+    alert("Help & Support section coming soon.");
+}
+
+window.addEventListener("click", function(e){
+    const profile = document.getElementById("navProfile");
+    const panel = document.getElementById("profileDropdownPanel");
+
+    if(profile && !profile.contains(e.target)){
+        panel.classList.remove("show");
+    }
+});
+function logoutUser(){
+    localStorage.removeItem("user");
+    alert("Logged out successfully");
+    location.reload();
+}
+
+// run on load
+window.onload = showUser;
+
+</script>
+
+
+<div id="cart-panel">
+    <h3 style="margin:0 0 15px 0; display:flex; justify-content:space-between; align-items:center;">
+        🛒 Cart <span id="cart-count" style="background:#ff8c42; color:white; padding:4px 8px; border-radius:12px;">0</span>
+        <span onclick="toggleCart()" style="cursor:pointer; font-size:20px;">×</span>
+    </h3>
+    <div id="cart-items"></div>
+    <div id="cart-total" style="font-weight:bold; color:#ff8c42; margin:15px 0; text-align:center; font-size:18px;"></div>
+    <button onclick="alert('Proceeding to checkout!'); toggleCart();" 
+            style="width:100%; padding:12px; background:#ff8c42; color:white; border:none; border-radius:8px; font-weight:600;">
+        Checkout
+    </button>
+</div>
+
+
+<div id="loginModal" class="modal">
+    <div class="modal-content login-modal-box">
+        <span class="close" onclick="closeLogin()">&times;</span>
+
+        <div class="login-top">
+            <div class="login-icon"><i class="fas fa-user-circle"></i></div>
+            <h2>Welcome Back</h2>
+            <p>Login to continue your artisan journey</p>
+        </div>
+
+        <div class="login-form">
+            <div class="input-group">
+                <label for="username">Your Name</label>
+                <input type="text" id="username" placeholder="Enter your name">
+            </div>
+
+            <div class="input-group">
+                <label for="useremail">Email Address</label>
+                <input type="email" id="useremail" placeholder="Enter your email">
+            </div>
+
+            <div class="input-group">
+                <label for="userpassword">Password</label>
+                <input type="password" id="userpassword" placeholder="Enter your password">
+            </div>
+
+            <button onclick="loginUser()" class="login-submit-btn">
+                Login / Signup
+            </button>
+        </div>
+    </div>
+</div>
+<div id="ordersModal" class="modal">
+    <div class="modal-content orders-modal-box">
+        <span class="close" onclick="closeOrdersModal()">&times;</span>
+
+        <div class="orders-top">
+            <div class="orders-icon">📦</div>
+            <h2>Previous Orders</h2>
+            <p>Your recent purchases from CraftConnect AI</p>
+        </div>
+
+        <div id="ordersList" class="orders-list"></div>
+    </div>
+</div>
+</body>
+</html>
